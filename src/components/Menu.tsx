@@ -9,7 +9,7 @@ const menuItems = [
         visible: ["admin", "teacher", "student", "parent"],
       },
       {
-        icon: "/teacher.png",
+        icon: "/lecturer.png",
         label: "Teachers",
         href: "/list/teachers",
         visible: ["admin", "teacher"],
@@ -112,3 +112,13 @@ const menuItems = [
     ],
   },
 ];
+
+const Menu = () => {
+  return (
+    <div className="">
+      {menuItems.map(i => (
+        <div className="" key={i.title}></div>
+      ))}
+    </div>
+  )
+}
