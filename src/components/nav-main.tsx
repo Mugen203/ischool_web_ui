@@ -1,4 +1,3 @@
-// nav-main.tsx (No changes from previous version)
 "use client"
 
 import { ChevronRight, type LucideIcon } from "lucide-react"
@@ -31,7 +30,7 @@ interface NavItem {
 export function NavMain({ items }: { items: NavItem[] }) {
     return (
         <SidebarGroup>
-            <SidebarGroupLabel>Platform</SidebarGroupLabel>
+            <SidebarGroupLabel>Main</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
                     <Collapsible key={item.title} asChild defaultOpen={item.url === "/"}>

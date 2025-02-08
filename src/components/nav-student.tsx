@@ -1,43 +1,47 @@
 // components/nav-student.tsx
 "use client"
-
-import { ChevronRight, Notebook, type LucideIcon } from "lucide-react"
+import { useCallback } from "react"
+import { ChevronRight } from "lucide-react"
 import {
-    Collapsible, CollapsibleContent, CollapsibleTrigger,
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import {
-    SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuAction, SidebarMenuButton,
-    SidebarMenuItem, SidebarMenuSub, SidebarMenuSubButton, SidebarMenuSubItem,
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuAction,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    SidebarMenuSub,
+    SidebarMenuSubButton,
+    SidebarMenuSubItem,
+    useSidebar,
 } from "@/components/ui/sidebar"
 import {
-    Users,
+    Home,
     User,
-    Calendar,
     ClipboardList,
     Award,
     Wallet,
-    Library,
+    Notebook,
+    Calendar,
     Activity,
-    BookCheck,
+    Library,
+    FileText,
     FilePlus,
     FileMinus,
-    FileText,
     FileSearch,
     Laptop,
-    Home,
-    BadgeInfo
-} from "lucide-react";
+    BookCheck,
+} from "lucide-react"
+import type { NavItem } from "@/types/navigation"
 
-interface NavItem {
-    title: string;
-    url?: string;
-    icon?: React.ComponentType<any>;
-    items?: NavItem[];
-    roles?: string[];  // Keep for consistency, even if unused here
-}
-
-const studentNavItems: NavItem[] = [
-   {
+// Organize student navigation items by category
+const studentNavGroups: Record<string, NavItem[]> = {
+    main: [
+        {
             title: "Dashboard",
             url: "/student",
             icon: Home,
@@ -47,26 +51,10 @@ const studentNavItems: NavItem[] = [
             title: "My Profile",
             url: "/students/me",
             icon: User,
-            roles: ["Student"]
+            roles: ["Student"],
         },
-        {
-            title: "Enrollment",
-            url: "/students/enrollment",
-            icon: ClipboardList,
-            roles: ["Student"]
-        },
-        {
-            title: "Grades",
-            url: "/students/grades",
-            icon: Award,
-            roles: ["Student"]
-        },
-        {
-            title: "Financial Summary",
-            url: "/students/financials",
-            icon: Wallet,
-            roles: ["Student"]
-        },
+    ],
+    academic: [
         {
             title: "Courses",
             icon: Notebook,
@@ -74,34 +62,55 @@ const studentNavItems: NavItem[] = [
             items: [
                 { title: "Register for Courses", url: "/courses/register", icon: FilePlus, roles: ["Student"] },
                 { title: "Drop Courses", url: "/courses/drop", icon: FileMinus, roles: ["Student"] },
-            ]
+            ],
         },
         {
-          title: "Attendance",
-          url: "/attendance/student",
-          icon: Calendar,
-          roles: ["Student"],
-        },
-        {
-            title: "Student Life",
-            icon: Activity,
+            title: "Grades",
+            url: "/students/grades",
+            icon: Award,
             roles: ["Student"],
-              items: [
-                {title: "Clubs & Societies", url: "/student-life/clubs", roles: ["Student"]},
-                {title: "Residential Tasks", url:"/student-life/residential", roles: ["Student"]}, //  Example
-              ]
-          },
+        },
+        {
+            title: "Attendance",
+            url: "/attendance/student",
+            icon: Calendar,
+            roles: ["Student"],
+        },
+    ],
+    resources: [
         {
             title: "Library",
             icon: Library,
             roles: ["Student"],
             items: [
-                {title: "Library Center", url: "/library/center", roles:["Student"]},
-                {title: "OPAC", url: "/library/opac", icon: FileSearch, roles:["Student"]},
+                { title: "Library Center", url: "/library/center", roles: ["Student"] },
+                { title: "OPAC", url: "/library/opac", icon: FileSearch, roles: ["Student"] },
                 { title: "Online Library", url: "/library/online", icon: Laptop, roles: ["Student"] },
-                {title: "Book Borrowing", url: "/students/library/borrow", icon: BookCheck, roles: ["Student"]},
-
-            ]
+                { title: "Book Borrowing", url: "/students/library/borrow", icon: BookCheck, roles: ["Student"] },
+            ],
+        },
+        {
+            title: "Student Life",
+            icon: Activity,
+            roles: ["Student"],
+            items: [
+                { title: "Clubs & Societies", url: "/student-life/clubs", roles: ["Student"] },
+                { title: "Residential Tasks", url: "/student-life/residential", roles: ["Student"] },
+            ],
+        },
+    ],
+    administrative: [
+        {
+            title: "Enrollment",
+            url: "/students/enrollment",
+            icon: ClipboardList,
+            roles: ["Student"],
+        },
+        {
+            title: "Financial Summary",
+            url: "/students/financials",
+            icon: Wallet,
+            roles: ["Student"],
         },
         {
             title: "Reports",
@@ -120,7 +129,7 @@ const studentNavItems: NavItem[] = [
                 { title: "National Service Application", url: "/reports/national-service", roles: ["Student"] },
             ],
         },
-          {
+        {
             title: "Applications",
             icon: FilePlus,
             roles: ["Student"],
@@ -134,53 +143,91 @@ const studentNavItems: NavItem[] = [
                 { title: "Scholarship", url: "/applications/scholarship", roles: ["Student"] },
             ],
         },
-
-];
-
-
+    ],
+}
 
 export function NavStudent() {
+    const { state } = useSidebar()
+
+    const renderMenuItem = useCallback((item: NavItem) => {
+        const hasSubItems = item.items && item.items.length > 0
+
+        return (
+            <Collapsible key={item.title} asChild>
+                <SidebarMenuItem>
+                    <SidebarMenuButton
+                        asChild
+                        tooltip={state ? item.title : undefined}
+                        className="w-full"
+                    >
+                        <a href={item.url} className="flex w-full items-center">
+                            {item.icon && <item.icon className="mr-2 h-4 w-4 shrink-0" />}
+                            {state && <span className="flex-1 truncate">{item.title}</span>}
+                        </a>
+                    </SidebarMenuButton>
+
+                    {hasSubItems && (
+                        <>
+                            <CollapsibleTrigger asChild>
+                                <SidebarMenuAction 
+                                    className="transition-transform duration-200 data-[state=open]:rotate-90"
+                                >
+                                    <ChevronRight className="h-4 w-4" />
+                                    <span className="sr-only">Toggle</span>
+                                </SidebarMenuAction>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent>
+                                <SidebarMenuSub>
+                                    {item.items?.map((subItem) => (
+                                        <SidebarMenuSubItem key={subItem.title}>
+                                            <SidebarMenuSubButton asChild className="w-full">
+                                                <a href={subItem.url} className="flex w-full items-center">
+                                                    {subItem.icon && (
+                                                        <subItem.icon className="mr-2 h-4 w-4 shrink-0" />
+                                                    )}
+                                                    <span className="flex-1 truncate">{subItem.title}</span>
+                                                </a>
+                                            </SidebarMenuSubButton>
+                                        </SidebarMenuSubItem>
+                                    ))}
+                                </SidebarMenuSub>
+                            </CollapsibleContent>
+                        </>
+                    )}
+                </SidebarMenuItem>
+            </Collapsible>
+        )
+    }, [state])
+
     return (
-        <SidebarGroup>
-            <SidebarGroupLabel>Student</SidebarGroupLabel>
-            <SidebarMenu>
-                {studentNavItems.map((item) => (
-                    <Collapsible key={item.title} asChild defaultOpen={item.url === "/student"}>
-                        <SidebarMenuItem>
-                            <SidebarMenuButton asChild tooltip={item.title}>
-                                <a href={item.url}>
-                                    {item.icon && <item.icon className="mr-2" />}
-                                    <span>{item.title}</span>
-                                </a>
-                            </SidebarMenuButton>
-                            {item.items && item.items.length > 0 && (
-                                <>
-                                    <CollapsibleTrigger asChild>
-                                        <SidebarMenuAction className="data-[state=open]:rotate-90">
-                                            <ChevronRight />
-                                            <span className="sr-only">Toggle</span>
-                                        </SidebarMenuAction>
-                                    </CollapsibleTrigger>
-                                    <CollapsibleContent>
-                                        <SidebarMenuSub>
-                                            {item.items?.map((subItem) => (
-                                                <SidebarMenuSubItem key={subItem.title}>
-                                                    <SidebarMenuSubButton asChild>
-                                                        <a href={subItem.url}>
-                                                            {subItem.icon && <subItem.icon className="mr-2" />}
-                                                            <span>{subItem.title}</span>
-                                                        </a>
-                                                    </SidebarMenuSubButton>
-                                                </SidebarMenuSubItem>
-                                            ))}
-                                        </SidebarMenuSub>
-                                    </CollapsibleContent>
-                                </>
-                            )}
-                        </SidebarMenuItem>
-                    </Collapsible>
-                ))}
-            </SidebarMenu>
-        </SidebarGroup>
-    );
+        <>
+            <SidebarGroup>
+                <SidebarGroupLabel>Main Navigation</SidebarGroupLabel>
+                <SidebarMenu>
+                    {studentNavGroups.main.map(renderMenuItem)}
+                </SidebarMenu>
+            </SidebarGroup>
+
+            <SidebarGroup>
+                <SidebarGroupLabel>Academic</SidebarGroupLabel>
+                <SidebarMenu>
+                    {studentNavGroups.academic.map(renderMenuItem)}
+                </SidebarMenu>
+            </SidebarGroup>
+
+            <SidebarGroup>
+                <SidebarGroupLabel>Resources</SidebarGroupLabel>
+                <SidebarMenu>
+                    {studentNavGroups.resources.map(renderMenuItem)}
+                </SidebarMenu>
+            </SidebarGroup>
+
+            <SidebarGroup>
+                <SidebarGroupLabel>Administrative</SidebarGroupLabel>
+                <SidebarMenu>
+                    {studentNavGroups.administrative.map(renderMenuItem)}
+                </SidebarMenu>
+            </SidebarGroup>
+        </>
+    )
 }

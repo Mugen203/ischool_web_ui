@@ -9,7 +9,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 import {
   SidebarProvider,
   SidebarInset,
-  SidebarTrigger
+  SidebarTrigger,
 } from "@/components/ui/sidebar"; // Import SidebarProvider and related components
 import { Separator } from "@/components/ui/separator";
 import {
@@ -19,78 +19,78 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-
+} from "@/components/ui/breadcrumb";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "iSchool",
-    description: "VVU School Management System",
+  title: "iSchool",
+  description: "VVU School Management System",
 };
 
 export default function DashboardLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
+  // *IMPORTANT*:  Replace this with your actual authentication logic.
+  const user = {
+    name: "Kwaku Ampem Affram",
+    email: "radahn@example.com",
+    role: "Student", //  Change this to test different roles
+    avatar: "/shadcn.jpg", // Replace with a real avatar path
+  };
+  // const user = {
+  //     name: "Admin User",
+  //     email: "admin@example.com",
+  //     role: "Administrator",
+  //     avatar: "/path/to/admin/avatar.jpg"
+  // };
+  //const user = null; // Simulate a logged-out user
 
-    // *IMPORTANT*:  Replace this with your actual authentication logic.
-    const user = {
-        name: "John Doe",
-        email: "john.doe@example.com",
-        role: "Administrator",  //  Change this to test different roles
-        avatar: "/shadcn.jpg" // Replace with a real avatar path
-    };
-    // const user = {
-    //     name: "Admin User",
-    //     email: "admin@example.com",
-    //     role: "Administrator",
-    //     avatar: "/path/to/admin/avatar.jpg"
-    // };
-    //const user = null; // Simulate a logged-out user
+  return (
+    <SidebarProvider>
+      {/* Wrap everything with SidebarProvider */}
+      <div className="hidden md:block border-r">
+        {user ? (
+          <AppSidebar user={user} />
+        ) : (
+          <div className="p-4">
+            <p>
+              Please{" "}
+              <Link href="/login" className="text-blue-500">
+                log in
+              </Link>{" "}
+              to access the dashboard.
+            </p>
+          </div>
+        )}
+      </div>
+      <SidebarInset className="flex-1">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+          <div className="flex items-center gap-2 px-4 container mx-auto">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            {/*  Breadcrumbs (Optional) - Customize as needed */}
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem className="hidden md:block">
+                  <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className="hidden md:block" />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Current Page</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
 
-
-    return (
-      <SidebarProvider> {/* Wrap everything with SidebarProvider */}
-        <div className={`h-screen flex ${inter.className}`}>
-             <div className="hidden md:block w-[250px] border-r">
-              {user ? (
-                <AppSidebar user={user} />
-                  ) : (
-                    <div className="p-4">
-                        <p>Please <Link href="/login" className="text-blue-500">log in</Link> to access the dashboard.</p>
-                    </div>
-                )}
-            </div>
-            <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-                  <div className="flex items-center gap-2 px-4 container mx-auto">
-                    <SidebarTrigger className="-ml-1" />
-                    <Separator orientation="vertical" className="mr-2 h-4" />
-                    {/*  Breadcrumbs (Optional) - Customize as needed */}
-                     <Breadcrumb>
-                      <BreadcrumbList>
-                        <BreadcrumbItem className="hidden md:block">
-                          <BreadcrumbLink href="/dashboard">
-                            Dashboard
-                          </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator className="hidden md:block" />
-                        <BreadcrumbItem>
-                          <BreadcrumbPage>Current Page</BreadcrumbPage>
-                        </BreadcrumbItem>
-                      </BreadcrumbList>
-                    </Breadcrumb>
-                  </div>
-                </header>
-
-              {/* Main Content Area */}
-                <main className="flex flex-1 flex-col gap-4 p-4 md:p-6 lg:p-8 overflow-auto">
-                    {children}
-                </main>
-            </SidebarInset>
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col gap-4 p-4 md:p-6 lg:p-8 overflow-auto">
+          {children}
         </div>
-      </SidebarProvider>
-    );
+      </SidebarInset>
+    </SidebarProvider>
+  );
 }
