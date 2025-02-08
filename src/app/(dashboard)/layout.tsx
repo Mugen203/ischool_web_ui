@@ -39,7 +39,7 @@ export default function DashboardLayout({
     const user = {
         name: "John Doe",
         email: "john.doe@example.com",
-        role: "Student",  //  Change this to test different roles
+        role: "Administrator",  //  Change this to test different roles
         avatar: "/shadcn.jpg" // Replace with a real avatar path
     };
     // const user = {
