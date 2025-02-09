@@ -1,5 +1,12 @@
 "use client";
 
+interface ScheduleEvent {
+  time: string;
+  title: string;
+  type: "class" | "assignment" | "exam" | "meeting";
+  description: string;
+}
+
 import {
   Activity,
   BookOpen,
@@ -19,6 +26,36 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { Overview } from "@/components/overview";
 import { RecentActivity } from "@/components/recent-activity";
+import { TodayClassesCard } from "@/components/student/today-classes-card";
+import { ScheduleCard } from "@/components/student/schedule-card";
+
+const todayClasses = [
+  {
+    courseCode: "MATH201",
+    name: "Advanced Calculus",
+    startTime: "08:00 AM",
+    endTime: "09:30 AM",
+    room: "LH-201",
+    lecturer: "Dr. Smith",
+  },
+  // Add more classes...
+];
+
+const scheduleEvents: ScheduleEvent[] = [
+  {
+    time: "08:00 AM",
+    title: "Advanced Calculus",
+    type: "class",
+    description: "Room LH-201",
+  },
+  {
+    time: "10:00 AM",
+    title: "Programming Assignment Due",
+    type: "assignment",
+    description: "CS301 - Data Structures",
+  },
+  // Add more events...
+];
 
 export default function StudentDashboardPage() {
   return (
@@ -113,6 +150,13 @@ export default function StudentDashboardPage() {
                 <RecentActivity />
               </CardContent>
             </Card>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            <TodayClassesCard
+              classes={todayClasses}
+              className="lg:col-span-4"
+            />
+            <ScheduleCard events={scheduleEvents} className="lg:col-span-3" />
           </div>
         </TabsContent>
       </Tabs>

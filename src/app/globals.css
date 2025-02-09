@@ -33,6 +33,12 @@
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
+
+    /* Transition variables */
+    --transition-all: all 200ms ease-in-out;
+    --transition-transform: transform 200ms ease-in-out;
+    --transition-opacity: opacity 200ms ease-in-out;
+    --transition-colors: background-color, border-color, color, fill, stroke 200ms ease-in-out;
   }
 
   .dark {
@@ -64,5 +70,23 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-all);
+  }
+
+  .transition-transform-smooth {
+    transition: var(--transition-transform);
+  }
+
+  .transition-opacity-smooth {
+    transition: var(--transition-opacity);
+  }
+
+  .transition-colors-smooth {
+    transition: var(--transition-colors);
   }
 }

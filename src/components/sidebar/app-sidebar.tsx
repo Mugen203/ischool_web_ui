@@ -33,18 +33,24 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: User;
 }
 
-const commonNavItems = [
-  {
-    title: "Dashboard",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "Settings",
-    url: "/settings",
-    icon: Settings2,
-  },
-];
+const getDashboardUrl = (role: string) => {
+  switch (role.toLowerCase()) {
+    case "administrator":
+      return "/admin/dashboard";
+    case "student":
+      return "/student/dashboard";
+    case "lecturer":
+      return "/lecturer/dashboard";
+    case "hod":
+      return "/hod/dashboard";
+    case "dean":
+      return "/dean/dashboard";
+    case "grademaster":
+      return "/grademaster/dashboard";
+    default:
+      return "/";
+  }
+};
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const { state } = useSidebar();
@@ -57,6 +63,20 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
     avatar: user?.avatar || "",
   };
 
+  // Update commonNavItems to use dynamic dashboard URL
+  const commonNavItems = [
+    {
+      title: "Dashboard",
+      url: getDashboardUrl(safeUser.role),
+      icon: Home,
+    },
+    {
+      title: "Settings",
+      url: "/settings",
+      icon: Settings2,
+    },
+  ];
+
   // Simulate loading state
   React.useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1000);
@@ -68,8 +88,10 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       collapsible="icon"
       variant="inset"
       className={cn(
-        "transition-all duration-300",
-        state === "collapsed" && "w-[var(--sidebar-width-icon)]"
+        "transition-all duration-300 ease-in-out",
+        state === "collapsed" && "w-[var(--sidebar-width-icon)]",
+        // Add smooth transitions for child elements
+        "[&_*]:transition-all [&_*]:duration-200 [&_*]:ease-in-out"
       )}
       {...props}
     >
@@ -84,7 +106,8 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                 asChild
                 className={cn(
                   "px-4",
-                  state === "collapsed" && "justify-center"
+                  state === "collapsed" && "justify-center",
+                  "transition-transform hover:scale-[0.98]"
                 )}
               >
                 <a href="/">
