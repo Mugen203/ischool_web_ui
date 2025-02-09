@@ -4,5 +4,6 @@
     },
     "javascript.inlayHints.parameterNames.enabled": "all",
     "javascript.inlayHints.parameterTypes.enabled": true,
-    "javascript.inlayHints.propertyDeclarationTypes.enabled": true
+    "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
+    "editor.fontFamily": "Rec Mono Casual, JetBrains Mono, Consolas, 'Courier New', monospace"
 }

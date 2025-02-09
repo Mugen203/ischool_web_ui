@@ -1,15 +1,15 @@
 "use client";
 import * as React from "react";
 import { Command, LifeBuoy, Settings2, Home, School2 } from "lucide-react";
-import { NavMain } from "@/components/nav-main";
-import { NavAdmin } from "@/components/nav-admin";
-import { NavStudent } from "@/components/nav-student";
-import { NavLecturer } from "@/components/nav-lecturer";
-import { NavHOD } from "@/components/nav-hod";
-import { NavDean } from "@/components/nav-dean";
-import { NavGrademaster } from "@/components/nav-grademaster";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
+import { NavMain } from "@/components/sidebar/nav-main";
+import { NavAdmin } from "@/components/sidebar/nav-admin";
+import { NavStudent } from "@/components/sidebar/nav-student";
+import { NavLecturer } from "@/components/sidebar/nav-lecturer";
+import { NavHOD } from "@/components/sidebar/nav-hod";
+import { NavDean } from "@/components/sidebar/nav-dean";
+import { NavGrademaster } from "@/components/sidebar/nav-grademaster";
+import { NavSecondary } from "@/components/sidebar/nav-secondary";
+import { NavUser } from "@/components/sidebar/nav-user";
 import {
   NavSkeleton,
   SidebarHeaderSkeleton,
@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/sidebar";
 import type { User } from "@/types/navigation";
 import { cn } from "@/lib/utils";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "../ui/skeleton";
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user: User;
