@@ -36,9 +36,9 @@ export default function Layout({
       </div>
 
       {/* Main content area */}
-      <main className="flex-1 space-y-4 p-1 pt-0 bg-background text-foreground">
-        {/* Header section */}
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b">
+      <main className="flex-1 flex flex-col bg-background text-foreground">
+        {/* Sticky Header section */}
+        <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background">
           <div className="flex items-center gap-2 px-4 container mx-auto">
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />

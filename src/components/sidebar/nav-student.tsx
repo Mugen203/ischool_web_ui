@@ -48,13 +48,13 @@ const studentNavGroups: Record<string, NavItem[]> = {
       items: [
         {
           title: "Register for Courses",
-          url: "/courses/register",
+          url: "/student/courses/register",
           icon: FilePlus,
           roles: ["Student"],
         },
         {
           title: "Drop Courses",
-          url: "/courses/drop",
+          url: "/student/courses/drop",
           icon: FileMinus,
           roles: ["Student"],
         },
@@ -62,13 +62,13 @@ const studentNavGroups: Record<string, NavItem[]> = {
     },
     {
       title: "Grades",
-      url: "/students/grades",
+      url: "/student/grades",
       icon: Award,
       roles: ["Student"],
     },
     {
       title: "Attendance",
-      url: "/attendance/student",
+      url: "/student/attendance",
       icon: Calendar,
       roles: ["Student"],
     },
