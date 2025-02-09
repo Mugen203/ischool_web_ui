@@ -1,16 +1,8 @@
-// app/dashboard/layout.tsx
-import Link from "next/link";
-import Image from "next/image";
+import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import React from "react";
 import { AppSidebar } from "@/components/app-sidebar";
-// import { Toaster } from "@/components/ui/toaster";
-import {
-  SidebarProvider,
-  SidebarInset,
-  SidebarTrigger,
-} from "@/components/ui/sidebar"; // Import SidebarProvider and related components
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import {
   Breadcrumb,
@@ -28,7 +20,7 @@ export const metadata: Metadata = {
   description: "VVU School Management System",
 };
 
-export default function DashboardLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -38,40 +30,19 @@ export default function DashboardLayout({
     name: "Kwaku Ampem Affram",
     email: "radahn@example.com",
     role: "Student", //  Change this to test different roles
-    avatar: "/shadcn.jpg", // Replace with a real avatar path
+    avatar: "/logo.jpg", // Replace with a real avatar path
   };
-  // const user = {
-  //     name: "Admin User",
-  //     email: "admin@example.com",
-  //     role: "Administrator",
-  //     avatar: "/path/to/admin/avatar.jpg"
-  // };
-  //const user = null; // Simulate a logged-out user
 
   return (
     <SidebarProvider>
-      {/* Wrap everything with SidebarProvider */}
       <div className="hidden md:block border-r">
-        {user ? (
-          <AppSidebar user={user} />
-        ) : (
-          <div className="p-4">
-            <p>
-              Please{" "}
-              <Link href="/login" className="text-blue-500">
-                log in
-              </Link>{" "}
-              to access the dashboard.
-            </p>
-          </div>
-        )}
+        <AppSidebar user={user} />
       </div>
-      <SidebarInset className="flex-1">
+      <main className="flex-1">
         <header className="flex h-16 shrink-0 items-center gap-2 border-b">
           <div className="flex items-center gap-2 px-4 container mx-auto">
-            <SidebarTrigger className="-ml-1" />
+            <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
-            {/*  Breadcrumbs (Optional) - Customize as needed */}
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
@@ -85,12 +56,10 @@ export default function DashboardLayout({
             </Breadcrumb>
           </div>
         </header>
-
-        {/* Main Content Area */}
         <div className="flex flex-1 flex-col gap-4 p-4 md:p-6 lg:p-8 overflow-auto">
           {children}
         </div>
-      </SidebarInset>
+      </main>
     </SidebarProvider>
   );
 }
