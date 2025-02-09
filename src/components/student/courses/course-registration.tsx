@@ -1,5 +1,6 @@
 "use client";
 
+// Import React and UI components
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,10 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
+/**
+ * Mock data for available courses
+ * TODO: Replace with API data in production
+ */
 const availableCourses = [
   { code: "COSC102", name: "Data Structures", credits: 3, level: 100 },
   { code: "COSC346", name: "Software Engineering", credits: 3, level: 200 },
@@ -27,32 +32,49 @@ const availableCourses = [
   { code: "COSC245", name: "Entrepreneurship", credits: 4, level: 400 },
 ];
 
+/**
+ * CourseRegistration Component
+ * Provides interface for students to register for courses and manage their course load
+ */
 export function CourseRegistration() {
+  // State management for course registration
   const [searchTerm, setSearchTerm] = useState("");
   const [registeredCourses, setRegisteredCourses] = useState<
     typeof availableCourses
   >([]);
   const [error, setError] = useState<string | null>(null);
 
+  // Filter courses based on search term
   const filteredCourses = availableCourses.filter(
     (course) =>
       course.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
       course.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  /**
+   * Handle course registration
+   * Validates registration conditions and updates state
+   */
   const handleRegister = (course: (typeof availableCourses)[0]) => {
+    // Check if course is already registered
     if (registeredCourses.some((c) => c.code === course.code)) {
       setError("You've already registered for this course.");
       return;
     }
+    // Check maximum course load
     if (registeredCourses.length >= 8) {
       setError("You can't register for more than 5 courses per semester.");
       return;
     }
+    // Add course to registered courses
     setRegisteredCourses([...registeredCourses, course]);
     setError(null);
   };
 
+  /**
+   * Handle course drop
+   * Removes course from registered courses
+   */
   const handleDrop = (course: (typeof availableCourses)[0]) => {
     setRegisteredCourses(
       registeredCourses.filter((c) => c.code !== course.code)
@@ -62,6 +84,7 @@ export function CourseRegistration() {
 
   return (
     <div className="space-y-6">
+      {/* Course Search Section */}
       <div>
         <Label htmlFor="search">Search Courses</Label>
         <Input
@@ -72,6 +95,7 @@ export function CourseRegistration() {
         />
       </div>
 
+      {/* Error Alert Display */}
       {error && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
@@ -80,6 +104,7 @@ export function CourseRegistration() {
         </Alert>
       )}
 
+      {/* Available Courses Table */}
       <div>
         <h3 className="text-lg font-semibold mb-2">Available Courses</h3>
         <Table>
@@ -110,6 +135,7 @@ export function CourseRegistration() {
         </Table>
       </div>
 
+      {/* Registered Courses Table */}
       <div>
         <h3 className="text-lg font-semibold mb-2">Registered Courses</h3>
         <Table>

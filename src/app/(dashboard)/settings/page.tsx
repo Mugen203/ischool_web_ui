@@ -1,5 +1,6 @@
 "use client";
 
+// Import React hooks and UI components
 import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -22,6 +23,10 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Type definition for user roles in the system
+ * Used for role-based access control and UI rendering
+ */
 type UserRole =
   | "Administrator"
   | "Student"
@@ -30,11 +35,19 @@ type UserRole =
   | "Dean"
   | "Grademaster";
 
+/**
+ * Settings Page Component
+ * Provides interface for users to manage their account settings
+ * Supports role-based settings display and administrator role switching
+ */
 export default function SettingsPage() {
+  // Client-side rendering control
   const [mounted, setMounted] = useState(false);
+  // Role management states
   const [actualRole, setActualRole] = useState<UserRole>("Student");
   const [selectedRole, setSelectedRole] = useState<UserRole>("Student");
 
+  // Initialize component with user role
   useEffect(() => {
     // TODO: Get actual role from auth context
     setActualRole("Student");
@@ -42,14 +55,19 @@ export default function SettingsPage() {
     setMounted(true);
   }, []);
 
+  // Prevent hydration issues
   if (!mounted) return null;
 
+  // Determine which role's settings to display
   const effectiveRole =
     actualRole === "Administrator" ? selectedRole : actualRole;
 
   return (
     <div className="container mx-auto py-10">
+      {/* Page Header */}
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
+
+      {/* Administrator Role Selector - Only visible to administrators */}
       {actualRole === "Administrator" && (
         <div className="mb-6">
           <Label htmlFor="role-select">View settings as:</Label>
@@ -57,10 +75,12 @@ export default function SettingsPage() {
             value={selectedRole}
             onValueChange={(value: UserRole) => setSelectedRole(value)}
           >
+            {/* Role selection options */}
             <SelectTrigger id="role-select" className="w-[180px]">
               <SelectValue placeholder="Select a role" />
             </SelectTrigger>
             <SelectContent>
+              {/* List of available roles */}
               <SelectItem value="Student">Student</SelectItem>
               <SelectItem value="Lecturer">Lecturer</SelectItem>
               <SelectItem value="HOD">Head of Department</SelectItem>
@@ -71,15 +91,21 @@ export default function SettingsPage() {
           </Select>
         </div>
       )}
+
+      {/* Settings Tabs Container */}
       <Tabs defaultValue="account" className="space-y-4">
+        {/* Tab Navigation */}
         <TabsList>
           <TabsTrigger value="account">Account</TabsTrigger>
           <TabsTrigger value="appearance">Appearance</TabsTrigger>
           <TabsTrigger value="notifications">Notifications</TabsTrigger>
+          {/* System tab only visible to administrators */}
           {effectiveRole === "Administrator" && (
             <TabsTrigger value="system">System</TabsTrigger>
           )}
         </TabsList>
+
+        {/* Account Settings Tab */}
         <TabsContent value="account">
           <Card>
             <CardHeader>
@@ -132,6 +158,8 @@ export default function SettingsPage() {
             </CardFooter>
           </Card>
         </TabsContent>
+
+        {/* Appearance Settings Tab */}
         <TabsContent value="appearance">
           <Card>
             <CardHeader>
@@ -164,6 +192,8 @@ export default function SettingsPage() {
             </CardFooter>
           </Card>
         </TabsContent>
+
+        {/* Notification Settings Tab */}
         <TabsContent value="notifications">
           <Card>
             <CardHeader>
@@ -219,6 +249,8 @@ export default function SettingsPage() {
             </CardFooter>
           </Card>
         </TabsContent>
+
+        {/* System Settings Tab - Admin Only */}
         {effectiveRole === "Administrator" && (
           <TabsContent value="system">
             <Card>

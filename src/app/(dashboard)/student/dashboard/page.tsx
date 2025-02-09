@@ -1,12 +1,14 @@
 "use client";
 
+// Type definition for schedule events displayed in the dashboard
 interface ScheduleEvent {
-  time: string;
-  title: string;
-  type: "class" | "assignment" | "exam" | "meeting";
-  description: string;
+  time: string; // Event time (e.g., "08:00 AM")
+  title: string; // Event title/name
+  type: "class" | "assignment" | "exam" | "meeting"; // Event category
+  description: string; // Additional event details
 }
 
+// Import UI components and icons
 import {
   Activity,
   BookOpen,
@@ -29,6 +31,7 @@ import { RecentActivity } from "@/components/recent-activity";
 import { TodayClassesCard } from "@/components/student/today-classes-card";
 import { ScheduleCard } from "@/components/student/schedule-card";
 
+// Mock data for today's classes
 const todayClasses = [
   {
     courseCode: "MATH201",
@@ -41,6 +44,7 @@ const todayClasses = [
   // Add more classes...
 ];
 
+// Mock data for schedule events
 const scheduleEvents: ScheduleEvent[] = [
   {
     time: "08:00 AM",
@@ -57,13 +61,17 @@ const scheduleEvents: ScheduleEvent[] = [
   // Add more events...
 ];
 
+// Student Dashboard Page Component
+// Displays overview of student's academic progress, schedule, and activities
 export default function StudentDashboardPage() {
   return (
     <div className="flex-1 space-y-4">
+      {/* Dashboard Header with Title and Actions */}
       <div className="flex items-center justify-between">
         <h2 className="text-3xl font-bold tracking-tight text-foreground">
           Dashboard
         </h2>
+        {/* Header Actions: Calendar and Download Button */}
         <div className="flex items-center space-x-2">
           <CalendarDateRangePicker />
           <Button>
@@ -72,15 +80,22 @@ export default function StudentDashboardPage() {
           </Button>
         </div>
       </div>
+
+      {/* Dashboard Content Tabs */}
       <Tabs defaultValue="overview" className="space-y-4">
+        {/* Tab Navigation */}
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="academics">Academics</TabsTrigger>
           <TabsTrigger value="finance">Finance</TabsTrigger>
           <TabsTrigger value="reports">Reports</TabsTrigger>
         </TabsList>
+
+        {/* Overview Tab Content */}
         <TabsContent value="overview" className="space-y-4">
+          {/* Key Metrics Cards Grid */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {/* GPA Card */}
             <Card className="bg-card text-card-foreground shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
@@ -95,6 +110,8 @@ export default function StudentDashboardPage() {
                 </p>
               </CardContent>
             </Card>
+
+            {/* Enrolled Courses Card */}
             <Card className="bg-card text-card-foreground shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
@@ -107,6 +124,8 @@ export default function StudentDashboardPage() {
                 <p className="text-xs text-muted-foreground">This semester</p>
               </CardContent>
             </Card>
+
+            {/* Fees Due Card */}
             <Card className="bg-card text-card-foreground shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Fees Due</CardTitle>
@@ -117,6 +136,8 @@ export default function StudentDashboardPage() {
                 <p className="text-xs text-muted-foreground">Due in 30 days</p>
               </CardContent>
             </Card>
+
+            {/* Attendance Card */}
             <Card className="bg-card text-card-foreground shadow-lg">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
@@ -130,7 +151,10 @@ export default function StudentDashboardPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Charts and Activity Section */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            {/* Academic Progress Chart */}
             <Card className="col-span-4 bg-card text-card-foreground shadow-lg">
               <CardHeader>
                 <CardTitle>Academic Progress</CardTitle>
@@ -139,6 +163,8 @@ export default function StudentDashboardPage() {
                 <Overview />
               </CardContent>
             </Card>
+
+            {/* Recent Activity Feed */}
             <Card className="col-span-3 bg-card text-card-foreground shadow-lg">
               <CardHeader>
                 <CardTitle>Recent Activity</CardTitle>
@@ -151,11 +177,15 @@ export default function StudentDashboardPage() {
               </CardContent>
             </Card>
           </div>
+
+          {/* Schedule Section */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+            {/* Today's Classes Card */}
             <TodayClassesCard
               classes={todayClasses}
               className="lg:col-span-4"
             />
+            {/* Schedule Events Card */}
             <ScheduleCard events={scheduleEvents} className="lg:col-span-3" />
           </div>
         </TabsContent>

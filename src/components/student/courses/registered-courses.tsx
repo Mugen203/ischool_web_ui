@@ -1,3 +1,4 @@
+// Import UI table components
 import {
   Table,
   TableBody,
@@ -7,6 +8,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+/**
+ * Mock data for registered courses
+ * TODO: Replace with API data in production
+ */
 const courses = [
   {
     code: "COSC101",
@@ -24,9 +29,15 @@ const courses = [
   { code: "COSC429", name: "Cloud Computing", credits: 3, level: 400 },
 ];
 
+/**
+ * RegisteredCourses Component
+ * Displays a table of courses the student is currently registered for
+ * Shows course code, name, credits, and level
+ */
 export function RegisteredCourses() {
   return (
     <Table>
+      {/* Table Header Section */}
       <TableHeader>
         <TableRow>
           <TableHead>Course Code</TableHead>
@@ -35,7 +46,10 @@ export function RegisteredCourses() {
           <TableHead>Level</TableHead>
         </TableRow>
       </TableHeader>
+
+      {/* Table Body - Course List */}
       <TableBody>
+        {/* Map through courses array to create table rows */}
         {courses.map((course) => (
           <TableRow key={course.code}>
             <TableCell>{course.code}</TableCell>
