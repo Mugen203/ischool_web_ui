@@ -19,7 +19,7 @@ export function DegreeProgress() {
   const overallProgress = (totalCompleted / totalRequired) * 100;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 shadow-lg">
       <Card>
         <CardHeader>
           <CardTitle>Overall Progress</CardTitle>

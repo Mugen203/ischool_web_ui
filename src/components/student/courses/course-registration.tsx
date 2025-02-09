@@ -16,10 +16,15 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
 const availableCourses = [
-  { code: "CSC102", name: "Data Structures", credits: 3, level: 100 },
-  { code: "MAT202", name: "Calculus II", credits: 4, level: 200 },
-  { code: "ENG302", name: "Technical Writing", credits: 3, level: 300 },
-  { code: "PHY402", name: "Thermodynamics", credits: 4, level: 400 },
+  { code: "COSC102", name: "Data Structures", credits: 3, level: 100 },
+  { code: "COSC346", name: "Software Engineering", credits: 3, level: 200 },
+  {
+    code: "ENG122",
+    name: "Language and Writing Skills II",
+    credits: 3,
+    level: 300,
+  },
+  { code: "COSC245", name: "Entrepreneurship", credits: 4, level: 400 },
 ];
 
 export function CourseRegistration() {
@@ -40,7 +45,7 @@ export function CourseRegistration() {
       setError("You've already registered for this course.");
       return;
     }
-    if (registeredCourses.length >= 5) {
+    if (registeredCourses.length >= 8) {
       setError("You can't register for more than 5 courses per semester.");
       return;
     }

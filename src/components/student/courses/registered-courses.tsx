@@ -9,14 +9,19 @@ import {
 
 const courses = [
   {
-    code: "CSC101",
+    code: "COSC101",
     name: "Introduction to Computer Science",
     credits: 3,
     level: 100,
   },
-  { code: "MAT201", name: "Linear Algebra", credits: 4, level: 200 },
-  { code: "ENG301", name: "Advanced Writing", credits: 3, level: 300 },
-  { code: "PHY401", name: "Quantum Mechanics", credits: 4, level: 400 },
+  { code: "COSC492", name: "Final Year Project", credits: 3, level: 400 },
+  {
+    code: "COSC455",
+    name: "Artificial Intelligence & Machine Learning",
+    credits: 3,
+    level: 400,
+  },
+  { code: "COSC429", name: "Cloud Computing", credits: 3, level: 400 },
 ];
 
 export function RegisteredCourses() {

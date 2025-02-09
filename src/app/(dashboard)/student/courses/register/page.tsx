@@ -19,7 +19,7 @@ export default function CourseRegistrationPage() {
   const [registrationOpen, setRegistrationOpen] = useState(true); // This should come from your backend
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-10 shadow-lg">
       <h1 className="text-3xl font-bold mb-6">Course Registration</h1>
 
       {!registrationOpen && (
@@ -38,7 +38,7 @@ export default function CourseRegistrationPage() {
           <TabsTrigger value="registered">Registered Courses</TabsTrigger>
           <TabsTrigger value="progress">Degree Progress</TabsTrigger>
           <TabsTrigger value="register" disabled={!registrationOpen}>
-            Register/Drop Courses
+            Register Courses
           </TabsTrigger>
         </TabsList>
         <TabsContent value="registered">
