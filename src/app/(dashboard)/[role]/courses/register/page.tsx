@@ -11,9 +11,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 // Import course-related components
-import { RegisteredCourses } from "@/components/student/courses/registered-courses";
-import { DegreeProgress } from "@/components/student/courses/degree-progress";
-import { CourseRegistration } from "@/components/student/courses/course-registration";
+import { RegisteredCourses } from "@/components/role/student/courses/registered-courses";
+import { DegreeProgress } from "@/components/role/student/courses/degree-progress";
+import { CourseRegistration } from "@/components/role/student/courses/course-registration";
 // Import alert components
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";

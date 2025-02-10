@@ -74,7 +74,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
     },
     {
       title: "Settings",
-      url: `/${role}/settings`,
+      url: `/${role}/settings`,  // Updated from /settings/${role}
       icon: Settings2,
       group: "main"
     }
@@ -84,7 +84,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
     case "student":
       return [
         ...roleBaseItems,
-        // Academic Group
+        // Academic Group URLs updated
         {
           title: "Courses",
           icon: BookOpen,
@@ -92,13 +92,13 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             {
               title: "Register for Courses",
-              url: "/student/courses/register",
+              url: `/${role}/courses/register`,  // Updated
               icon: FilePlus,
               group: "academic"
             },
             {
               title: "Drop Courses",
-              url: "/student/courses/drop",
+              url: `/${role}/courses/drop`,  // Updated
               icon: FileMinus,
               group: "academic",
             },
@@ -106,13 +106,13 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         },
         {
           title: "Grades",
-          url: "/student/grades",
+          url: `/${role}/grades`,  // Updated
           icon: Award,
           group: "academic",
         },
         {
           title: "Attendance",
-          url: "/student/attendance",
+          url: `/${role}/attendance`,  // Updated
           icon: Calendar,
           group: "academic",
         },
@@ -124,24 +124,24 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "Library Center", 
-              url: "/student/library/center",
+              url: `/${role}/library/center`,  // Updated
               group: "resources",
             },
             {
               title: "OPAC",
-              url: "/student/library/opac",
+              url: `/${role}/library/opac`,  // Updated
               icon: FileSearch,
               group: "resources",
             },
             {
               title: "Online Library",
-              url: "/student/library/online",
+              url: `/${role}/library/online`,  // Updated
               icon: Laptop,
               group: "resources",
             },
             {
               title: "Book Borrowing",
-              url: "/student/library/borrow",
+              url: `/${role}/library/borrow`,  // Updated
               icon: BookCheck,
               group: "resources",
             },
@@ -154,12 +154,12 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             {
               title: "Clubs & Societies",
-              url: "/student/activities/clubs",
+              url: `/${role}/activities/clubs`,  // Updated
               group: "resources",
             },
             {
               title: "Residential Tasks",
-              url: "/student/residential/tasks",
+              url: `/${role}/residential/tasks`,  // Updated
               group: "resources",
             },
           ],
@@ -167,13 +167,13 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         // Administrative Group
         {
           title: "Enrollment",
-          url: "/student/enrollment",
+          url: `/${role}/enrollment`,  // Updated
           icon: ClipboardList,
           group: "administrative",
         },
         {
           title: "Financial Summary",
-          url: "/student/financials",
+          url: `/${role}/financials`,  // Updated
           icon: Wallet,
           group: "administrative",
         },
@@ -184,52 +184,52 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             {
               title: "Registration Slip",
-              url: "/student/reports/registration",
+              url: `/${role}/reports/registration`,  // Updated
               group: "administrative",
             },
             {
               title: "Scholastic Report",
-              url: "/student/reports/scholastic",
+              url: `/${role}/reports/scholastic`,  // Updated
               group: "administrative",
             },
             {
               title: "My Lecturers",
-              url: "/student/reports/lecturers",
+              url: `/${role}/reports/lecturers`,  // Updated
               group: "administrative",
             },
             {
               title: "My Exemptions",
-              url: "/student/reports/exemptions",
+              url: `/${role}/reports/exemptions`,  // Updated
               group: "administrative",
             },
             {
               title: "Exam Permit",
-              url: "/student/reports/exam-permit",
+              url: `/${role}/reports/exam-permit`,  // Updated
               group: "administrative",
             },
             { 
               title: "Results Slip", 
-              url: "/student/reports/results",
+              url: `/${role}/reports/results`,  // Updated
               group: "administrative",
             },
             {
               title: "Courses to Repeat",
-              url: "/student/reports/repeat-courses",
+              url: `/${role}/reports/repeat-courses`,  // Updated
               group: "administrative",
             },
             {
               title: "Graduation Checklist",
-              url: "/student/reports/graduation-checklist",
+              url: `/${role}/reports/graduation-checklist`,  // Updated
               group: "administrative",
             },
             {
               title: "Graduation Slip",
-              url: "/student/reports/graduation-slip",
+              url: `/${role}/reports/graduation-slip`,  // Updated
               group: "administrative",
             },
             {
               title: "National Service Application",
-              url: "/student/reports/national-service",
+              url: `/${role}/reports/national-service`,  // Updated
               group: "administrative",
             },
           ],
@@ -241,37 +241,37 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "Hostel", 
-              url: "/student/applications/hostel",
+              url: `/${role}/applications/hostel`,  // Updated
               group: "administrative",
             },
             {
               title: "Certificate Collection",
-              url: "/student/applications/certificate",
+              url: `/${role}/applications/certificate`,  // Updated
               group: "administrative",
             },
             {
               title: "Matriculation Oath",
-              url: "/student/applications/matriculation",
+              url: `/${role}/applications/matriculation`,  // Updated
               group: "administrative",
             },
             {
               title: "Change of Program",
-              url: "/student/applications/change-program",
+              url: `/${role}/applications/change-program`,  // Updated
               group: "administrative",
             },
             {
               title: "Graduation",
-              url: "/student/applications/graduation",
+              url: `/${role}/applications/graduation`,  // Updated
               group: "administrative",
             },
             {
               title: "National Service",
-              url: "/student/applications/national-service",
+              url: `/${role}/applications/national-service`,  // Updated
               group: "administrative",
             },
             {
               title: "Scholarship",
-              url: "/student/applications/scholarship",
+              url: `/${role}/applications/scholarship`,  // Updated
               group: "administrative",
             },
           ],
@@ -281,16 +281,15 @@ export const getNavigation = (role: UserRole): NavItem[] => {
     case "lecturer":
       return [
         ...roleBaseItems,
-        // Academic Group
         {
           title: "My Classes",
-          url: "/lecturer/classes",
+          url: `/${role}/classes`,  // Updated
           icon: ClipboardList,
           group: "academic",
         },
         {
           title: "Course Materials",
-          url: "/lecturer/materials",
+          url: `/${role}/materials`,  // Updated
           icon: BookOpen,
           group: "academic",
         },
@@ -301,13 +300,13 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             {
               title: "Create Assignment",
-              url: "/lecturer/assignments/create",
+              url: `/${role}/assignments/create`,  // Updated
               icon: FileEdit,
               group: "academic",
             },
             {
               title: "View Assignments",
-              url: "/lecturer/assignments",
+              url: `/${role}/assignments`,  // Updated
               icon: FileText,
               group: "academic",
             },
@@ -316,14 +315,14 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         // Communication Group
         {
           title: "Messages",
-          url: "/lecturer/messages",
+          url: `/${role}/messages`,  // Updated
           icon: MessageSquare,
           group: "communication",
         },
         // Administrative Group
         {
           title: "Attendance",
-          url: "/lecturer/attendance",
+          url: `/${role}/attendance`,  // Updated
           icon: Calendar,
           group: "administrative",
         },
@@ -334,7 +333,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "Results Slip", 
-              url: "/lecturer/reports/results",
+              url: `/${role}/reports/results`,  // Updated
               group: "administrative",
             },
           ],
@@ -346,39 +345,39 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         ...roleBaseItems,
         {
           title: "Students",
-          url: "/grademaster/students",
+          url: `/${role}/students`,  // Updated
           icon: Users,
           group: "students",
           items: [
             { 
               title: "View Students", 
-              url: "/grademaster/students",
+              url: `/${role}/students`,  // Updated
               group: "students",
             },
           ],
         },
         {
           title: "Courses",
-          url: "/grademaster/courses",
+          url: `/${role}/courses`,  // Updated
           icon: BookOpen,
           group: "academic",
           items: [
             { 
               title: "View Courses", 
-              url: "/grademaster/courses",
+              url: `/${role}/courses`,  // Updated
               group: "academic",
             },
           ],
         },
         {
           title: "Class Enrollment",
-          url: "/grademaster/enrollment",
+          url: `/${role}/enrollment`,  // Updated
           icon: Files,
           group: "administrative",
         },
         {
           title: "Attendance",
-          url: "/grademaster/attendance",
+          url: `/${role}/attendance`,  // Updated
           icon: Calendar,
           group: "administrative",
         },
@@ -389,12 +388,12 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "Results Slip", 
-              url: "/grademaster/reports/results",
+              url: `/${role}/reports/results`,  // Updated
               group: "administrative",
             },
             {
               title: "Student Grades",
-              url: "/grademaster/reports/grades",
+              url: `/${role}/reports/grades`,  // Updated
               icon: Award,
               group: "administrative",
             },
@@ -405,10 +404,9 @@ export const getNavigation = (role: UserRole): NavItem[] => {
     case "hod":
       return [
         ...roleBaseItems,
-        // Academic Group
         {
           title: "My Classes",
-          url: "/hod/classes",
+          url: `/${role}/classes`,  // Updated
           icon: ClipboardList,
           group: "academic",
         },
@@ -419,17 +417,17 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Courses", 
-              url: "/hod/courses",
+              url: `/${role}/courses`,  // Updated
               group: "academic",
             },
             {
               title: "Assign Lecturers",
-              url: "/hod/courses/assign-lecturers",
+              url: `/${role}/courses/assign-lecturers`,  // Updated
               group: "academic",
             },
             {
               title: "Approve Course Materials",
-              url: "/hod/courses/materials/approve",
+              url: `/${role}/courses/materials/approve`,  // Updated
               group: "academic",
             },
           ],
@@ -442,17 +440,17 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Lecturers", 
-              url: "/hod/lecturers",
+              url: `/${role}/lecturers`,  // Updated
               group: "faculty",
             },
             {
               title: "Assign Courses",
-              url: "/hod/lecturers/assign-courses",
+              url: `/${role}/lecturers/assign-courses`,  // Updated
               group: "faculty",
             },
             {
               title: "Faculty Evaluation",
-              url: "/hod/faculty/evaluation",
+              url: `/${role}/faculty/evaluation`,  // Updated
               icon: FileSignature,
               group: "faculty",
             },
@@ -460,7 +458,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         },
         {
           title: "Attendance",
-          url: "/hod/attendance",
+          url: `/${role}/attendance`,  // Updated
           icon: Calendar,
           group: "administrative",
         },
@@ -472,17 +470,17 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Students", 
-              url: "/hod/students",
+              url: `/${role}/students`,  // Updated
               group: "students",
             },
             {
               title: "Academic Standing",
-              url: "/hod/students/academic-standing",
+              url: `/${role}/students/academic-standing`,  // Updated
               group: "students",
             },
             {
               title: "Graduation Eligibility",
-              url: "/hod/students/graduation-eligibility",
+              url: `/${role}/students/graduation-eligibility`,  // Updated
               icon: GraduationCap,
               group: "students",
             },
@@ -496,25 +494,25 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "Results Slip", 
-              url: "/hod/reports/results",
+              url: `/${role}/reports/results`,  // Updated
               group: "administrative",
             },
             {
               title: "Department Performance",
-              url: "/hod/reports/department-performance",
+              url: `/${role}/reports/department-performance`,  // Updated
               group: "administrative",
             },
           ],
         },
         {
           title: "Department Approvals",
-          url: "/hod/approvals",
+          url: `/${role}/approvals`,  // Updated
           icon: ClipboardCheck,
           group: "administrative",
         },
         {
           title: "Departmental Meetings",
-          url: "/hod/meetings",
+          url: `/${role}/meetings`,  // Updated
           icon: ListChecks,
           group: "administrative",
         },
@@ -523,7 +521,6 @@ export const getNavigation = (role: UserRole): NavItem[] => {
     case "dean":
       return [
         ...roleBaseItems,
-        // Faculty Group
         {
           title: "Lecturers",
           icon: Briefcase,
@@ -531,17 +528,17 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Lecturers", 
-              url: "/dean/lecturers",
+              url: `/${role}/lecturers`,  // Updated
               group: "faculty",
             },
             {
               title: "Assign Courses",
-              url: "/dean/lecturers/assign-courses",
+              url: `/${role}/lecturers/assign-courses`,  // Updated
               group: "faculty",
             },
             {
               title: "Faculty Evaluation",
-              url: "/dean/faculty/evaluation",
+              url: `/${role}/faculty/evaluation`,  // Updated
               icon: FileSignature,
               group: "faculty",
             },
@@ -549,7 +546,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         },
         {
           title: "Attendance",
-          url: "/dean/attendance",
+          url: `/${role}/attendance`,  // Updated
           icon: Calendar,
           group: "administrative",
         },
@@ -561,17 +558,17 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Students", 
-              url: "/dean/students",
+              url: `/${role}/students`,  // Updated
               group: "students",
             },
             {
               title: "Academic Standing",
-              url: "/dean/students/academic-standing",
+              url: `/${role}/students/academic-standing`,  // Updated
               group: "students",
             },
             {
               title: "Graduation Eligibility",
-              url: "/dean/students/graduation-eligibility",
+              url: `/${role}/students/graduation-eligibility`,  // Updated
               icon: GraduationCap,
               group: "students",
             },
@@ -580,7 +577,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         // Academic Group
         {
           title: "Grademasters",
-          url: "/dean/grademasters",
+          url: `/${role}/grademasters`,  // Updated
           icon: UserCheck,
           group: "academic",
         },
@@ -591,12 +588,12 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Courses", 
-              url: "/dean/courses",
+              url: `/${role}/courses`,  // Updated
               group: "academic",
             },
             {
               title: "Approve Course Materials",
-              url: "/dean/courses/materials/approve",
+              url: `/${role}/courses/materials/approve`,  // Updated
               group: "academic",
             },
           ],
@@ -609,25 +606,25 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "Results Slip", 
-              url: "/dean/reports/results",
+              url: `/${role}/reports/results`,  // Updated
               group: "administrative",
             },
             {
               title: "Faculty Performance",
-              url: "/dean/reports/faculty-performance",
+              url: `/${role}/reports/faculty-performance`,  // Updated
               group: "administrative",
             },
           ],
         },
         {
           title: "Departmental Approvals",
-          url: "/dean/approvals",
+          url: `/${role}/approvals`,  // Updated
           icon: ClipboardCheck,
           group: "administrative",
         },
         {
           title: "College Meetings",
-          url: "/dean/meetings",
+          url: `/${role}/meetings`,  // Updated
           icon: ListChecks,
           group: "administrative",
         },
@@ -636,7 +633,6 @@ export const getNavigation = (role: UserRole): NavItem[] => {
     case "admin":
       return [
         ...roleBaseItems,
-        // Main Group
         {
           title: "Registry",
           icon: Building,
@@ -644,13 +640,13 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Registry", 
-              url: "/administrator/registry",
+              url: `/${role}/registry`,  // Updated from /administrator to /admin
               icon: Building2,
               group: "main"
             },
             {
               title: "Edit Registry",
-              url: "/administrator/registry/edit",
+              url: `/${role}/registry/edit`,  // Updated from /administrator to /admin
               icon: FileEdit,
               group: "main"
             },
@@ -664,25 +660,25 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Students", 
-              url: "/administrator/students",
+              url: `/${role}/students`,  // Updated from /administrator to /admin
               icon: Users,
               group: "userManagement"
             },
             {
               title: "Add Student",
-              url: "/administrator/students/add",
+              url: `/${role}/students/add`,  // Updated from /administrator to /admin
               icon: UserPlus,
               group: "userManagement"
             },
             {
               title: "Edit Student",
-              url: "/administrator/students/edit",
+              url: `/${role}/students/edit`,  // Updated from /administrator to /admin
               icon: FileEdit,
               group: "userManagement"
             },
             {
               title: "Remove Student",
-              url: "/administrator/students/remove",
+              url: `/${role}/students/remove`,  // Updated from /administrator to /admin
               icon: UserMinus,
               group: "userManagement"
             },
@@ -695,25 +691,25 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Lecturers", 
-              url: "/administrator/lecturers",
+              url: `/${role}/lecturers`,  // Updated from /administrator to /admin
               icon: UserCog,
               group: "userManagement"
             },
             {
               title: "Add Lecturer",
-              url: "/administrator/lecturers/add",
+              url: `/${role}/lecturers/add`,  // Updated from /administrator to /admin
               icon: UserPlus,
               group: "userManagement"
             },
             {
               title: "Edit Lecturer",
-              url: "/administrator/lecturers/edit",
+              url: `/${role}/lecturers/edit`,  // Updated from /administrator to /admin
               icon: FileEdit,
               group: "userManagement"
             },
             {
               title: "Remove Lecturer",
-              url: "/administrator/lecturers/remove",
+              url: `/${role}/lecturers/remove`,  // Updated from /administrator to /admin
               icon: UserMinus,
               group: "userManagement"
             },
@@ -729,25 +725,25 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Courses", 
-              url: "/administrator/courses",
+              url: `/${role}/courses`,  // Updated from /administrator to /admin
               icon: BookOpen,
               group: "academic"
             },
             {
               title: "Add Course",
-              url: "/administrator/courses/add",
+              url: `/${role}/courses/add`,  // Updated from /administrator to /admin
               icon: BookCheck,
               group: "academic"
             },
             {
               title: "Edit Course",
-              url: "/administrator/courses/edit",
+              url: `/${role}/courses/edit`,  // Updated from /administrator to /admin
               icon: FileEdit,
               group: "academic"
             },
             {
               title: "Remove Course",
-              url: "/administrator/courses/remove",
+              url: `/${role}/courses/remove`,  // Updated from /administrator to /admin
               icon: FileMinus,
               group: "academic"
             },
@@ -763,31 +759,31 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             { 
               title: "View Classrooms", 
-              url: "/administrator/classrooms",
+              url: `/${role}/classrooms`,  // Updated from /administrator to /admin
               icon: Palette,
               group: "facilities"
             },
             {
               title: "Add Classroom",
-              url: "/administrator/classrooms/add",
+              url: `/${role}/classrooms/add`,  // Updated from /administrator to /admin
               icon: FilePlus,
               group: "facilities"
             },
             {
               title: "Edit Classroom",
-              url: "/administrator/classrooms/edit",
+              url: `/${role}/classrooms/edit`,  // Updated from /administrator to /admin
               icon: FileEdit,
               group: "facilities"
             },
             {
               title: "Remove Classroom",
-              url: "/administrator/classrooms/remove",
+              url: `/${role}/classrooms/remove`,  // Updated from /administrator to /admin
               icon: FileMinus,
               group: "facilities"
             },
             {
               title: "Schedules",
-              url: "/administrator/classrooms/schedules",
+              url: `/${role}/classrooms/schedules`,  // Updated from /administrator to /admin
               icon: Calendar,
               group: "facilities"
             },
@@ -803,19 +799,19 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           items: [
             {
               title: "Add User",
-              url: "/administrator/users/add",
+              url: `/${role}/users/add`,  // Updated from /administrator to /admin
               icon: UserPlus,
               group: "system"
             },
             {
               title: "Manage Users",
-              url: "/administrator/users/manage",
+              url: `/${role}/users/manage`,  // Updated from /administrator to /admin
               icon: UserCog,
               group: "system"
             },
             {
               title: "Remove User",
-              url: "/administrator/users/remove",
+              url: `/${role}/users/remove`,  // Updated from /administrator to /admin
               icon: UserMinus,
               group: "system"
             },
@@ -823,19 +819,19 @@ export const getNavigation = (role: UserRole): NavItem[] => {
         },
         {
           title: "System Logs",
-          url: "/administrator/logs",
+          url: `/${role}/logs`,  // Updated from /administrator to /admin
           icon: FileText,
           group: "system"
         },
         {
           title: "System Monitoring",
-          url: "/administrator/monitoring",
+          url: `/${role}/monitoring`,  // Updated from /administrator to /admin
           icon: MonitorCheck,
           group: "system"
         },
         {
           title: "Database Management",
-          url: "/administrator/database",
+          url: `/${role}/database`,  // Updated from /administrator to /admin
           icon: Database,
           group: "system"
         },
