@@ -48,17 +48,16 @@ const todayClasses = [
 const scheduleEvents: ScheduleEvent[] = [
   {
     time: "08:00 AM",
-    title: "Advanced Calculus",
+    title: "Computer Vision",
     type: "class",
-    description: "Room LH-201",
+    description: "American High",
   },
   {
     time: "10:00 AM",
     title: "Programming Assignment Due",
     type: "assignment",
-    description: "CS301 - Data Structures",
+    description: "COSC301 - Data Structures",
   },
-  // Add more events...
 ];
 
 // Student Dashboard Page Component

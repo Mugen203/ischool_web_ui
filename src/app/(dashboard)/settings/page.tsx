@@ -28,7 +28,7 @@ import { Button } from "@/components/ui/button";
  * Used for role-based access control and UI rendering
  */
 type UserRole =
-  | "Administrator"
+  | "Admin"
   | "Student"
   | "Lecturer"
   | "HOD"
@@ -59,8 +59,7 @@ export default function SettingsPage() {
   if (!mounted) return null;
 
   // Determine which role's settings to display
-  const effectiveRole =
-    actualRole === "Administrator" ? selectedRole : actualRole;
+  const effectiveRole = actualRole === "Admin" ? selectedRole : actualRole;
 
   return (
     <div className="container mx-auto py-10">
@@ -68,7 +67,7 @@ export default function SettingsPage() {
       <h1 className="text-3xl font-bold mb-6">Settings</h1>
 
       {/* Administrator Role Selector - Only visible to administrators */}
-      {actualRole === "Administrator" && (
+      {actualRole === "Admin" && (
         <div className="mb-6">
           <Label htmlFor="role-select">View settings as:</Label>
           <Select
@@ -100,7 +99,7 @@ export default function SettingsPage() {
           <TabsTrigger value="appearance">Appearance</TabsTrigger>
           <TabsTrigger value="notifications">Notifications</TabsTrigger>
           {/* System tab only visible to administrators */}
-          {effectiveRole === "Administrator" && (
+          {effectiveRole === "Admin" && (
             <TabsTrigger value="system">System</TabsTrigger>
           )}
         </TabsList>
@@ -137,7 +136,7 @@ export default function SettingsPage() {
                   <Input id="department" placeholder="Enter your department" />
                 </div>
               )}
-              {effectiveRole === "Administrator" && (
+              {effectiveRole === "Admin" && (
                 <div className="space-y-2">
                   <Label htmlFor="admin-level">Admin Level</Label>
                   <Select>
@@ -251,7 +250,7 @@ export default function SettingsPage() {
         </TabsContent>
 
         {/* System Settings Tab - Admin Only */}
-        {effectiveRole === "Administrator" && (
+        {effectiveRole === "Admin" && (
           <TabsContent value="system">
             <Card>
               <CardHeader>

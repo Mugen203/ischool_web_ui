@@ -1,11 +1,7 @@
 "use client";
 
-const AdminPage = () => {
-  return (
-    <div className="">
-      <h1>Admin Page</h1>
-    </div>
-  );
-};
+import { redirect } from "next/navigation";
 
-export default AdminPage;
+export default function AdminPage() {
+  redirect("/student/dashboard");
+}
