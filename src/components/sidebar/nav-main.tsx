@@ -20,6 +20,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import type { NavItem } from "@/config/navigation";
+import Link from "next/link";
 
 /**
  * Props interface for NavMain component
@@ -52,10 +53,10 @@ export function NavMain({ groups }: NavMainProps) {
         <SidebarMenuItem>
           <SidebarMenuButton asChild tooltip={state ? item.title : undefined}>
             {item.url ? (
-              <a href={item.url} className="flex w-full items-center">
+              <Link href={item.url} className="flex w-full items-center">
                 {item.icon && <item.icon className="mr-2 h-4 w-4 shrink-0" />}
                 {state && <span className="flex-1 truncate">{item.title}</span>}
-              </a>
+              </Link>
             ) : (
               <span className="flex w-full items-center">
                 {item.icon && <item.icon className="mr-2 h-4 w-4 shrink-0" />}
@@ -77,8 +78,8 @@ export function NavMain({ groups }: NavMainProps) {
                   {item.items!.map((subItem: NavItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
-                        <a
-                          href={subItem.url}
+                        <Link
+                          href={subItem.url || ""}
                           className="flex w-full items-center"
                         >
                           {subItem.icon && (
@@ -87,7 +88,7 @@ export function NavMain({ groups }: NavMainProps) {
                           <span className="flex-1 truncate">
                             {subItem.title}
                           </span>
-                        </a>
+                        </Link>
                       </SidebarMenuSubButton>
                     </SidebarMenuSubItem>
                   ))}

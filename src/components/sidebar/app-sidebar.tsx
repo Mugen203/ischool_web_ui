@@ -17,6 +17,7 @@ import { User } from "@/types/auth";
 import { NavUser } from "./nav-user";
 import { NavMain } from "./nav-main";
 import { getNavigation, NavItem } from "@/config/navigation";
+import Link from "next/link";
 
 /**
  * Props interface for the AppSidebar component
@@ -81,7 +82,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                 "transition-transform hover:scale-[0.98]"
               )}
             >
-              <a href="/">
+              <Link href="/">
                 {/* App Logo/Icon Container */}
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <School2 className="size-6" />
@@ -97,7 +98,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                     </span>
                   </div>
                 )}
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
