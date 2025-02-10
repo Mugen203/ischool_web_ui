@@ -24,6 +24,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 /**
  * SearchCommand Component
@@ -31,12 +32,17 @@ import { Button } from "@/components/ui/button";
  * Triggered by clicking the search button or using Cmd/Ctrl + K shortcut
  */
 export function SearchCommand() {
-  // State to control command palette visibility
+  // Client-side only state management
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = React.useState(false);
 
-  // Set up keyboard shortcut listener
-  React.useEffect(() => {
-    // Handle keyboard shortcut (Cmd/Ctrl + K)
+  // Handle initial mounting
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Keyboard shortcut handler
+  useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
@@ -44,14 +50,15 @@ export function SearchCommand() {
       }
     };
 
-    // Add and clean up event listener
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  // Prevent hydration issues by not rendering until mounted
+  if (!mounted) return null;
+
   return (
     <>
-      {/* Search Button - Responsive design for different screen sizes */}
       <Button
         variant="outline"
         className="relative h-9 w-9 p-0 xl:h-10 xl:w-60 xl:justify-start xl:px-3 xl:py-2"
@@ -66,7 +73,7 @@ export function SearchCommand() {
         </kbd>
       </Button>
 
-      {/* Command Palette Dialog */}
+      {/* Only render dialog when mounted */}
       <CommandDialog open={open} onOpenChange={setOpen}>
         {/* Search Input Field */}
         <CommandInput placeholder="Type a command or search..." />

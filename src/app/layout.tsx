@@ -1,19 +1,25 @@
-// Import necessary dependencies
+// Import Next.js metadata type for SEO configuration
 import type { Metadata } from "next";
-// Import Google font
+// Import Inter font from Google Fonts for consistent typography
 import { Inter } from "next/font/google";
-// Import global styles
+// Import global CSS styles
 import "./globals.css";
+// Import authentication context provider
+import { AuthProvider } from "@/contexts/auth-context";
+// Import role switcher component
+import { RoleSwitcher } from "@/components/role-switcher";
 
 /**
  * Configure Inter font with Latin subset
- * This creates an optimized font instance for better performance
+ * This optimization loads only the Latin character set
+ * Improves performance by reducing font file size
  */
 const inter = Inter({ subsets: ["latin"] });
 
 /**
- * Metadata configuration for the application
- * Used by Next.js for SEO and document head management
+ * Application Metadata
+ * Defines SEO-related information and document head content
+ * Used by Next.js for generating meta tags and title
  */
 export const metadata: Metadata = {
   title: "iSchool",
@@ -22,11 +28,18 @@ export const metadata: Metadata = {
 
 /**
  * Root Layout Component
- * Provides the base HTML structure for all pages
+ * Serves as the application's base template
+ * Wraps all pages with common layout elements and providers
+ *
+ * Features:
+ * - Provides HTML structure
+ * - Applies Inter font
+ * - Wraps content in AuthProvider for authentication
+ * - Sets language for accessibility
  *
  * @param {Object} props - Component properties
- * @param {React.ReactNode} props.children - Child components to be rendered
- * @returns {JSX.Element} Root layout structure
+ * @param {React.ReactNode} props.children - Page content to be rendered
+ * @returns {JSX.Element} Application root layout
  */
 export default function RootLayout({
   children,
@@ -34,10 +47,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // Base HTML structure with language set to English
+    // HTML container with language set for accessibility
     <html lang="en">
-      {/* Body with Inter font applied via CSS classes */}
-      <body className={inter.className}>{children}</body>
+      {/* Authentication context provider wrapper */}
+      <AuthProvider>
+        {/* Body container with Inter font applied */}
+        <body className={inter.className}>
+          {/* Render page-specific content */}
+          {children}
+          {/* Role switcher component */}
+          <RoleSwitcher />
+        </body>
+      </AuthProvider>
     </html>
   );
 }

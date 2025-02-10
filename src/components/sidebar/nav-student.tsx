@@ -1,3 +1,4 @@
+/*
 // components/nav-student.tsx
 "use client";
 import { useCallback } from "react";
@@ -36,7 +37,7 @@ import {
   Laptop,
   BookCheck,
 } from "lucide-react";
-import type { NavItem } from "@/types/navigation";
+import type { NavItem } from "@/config/navigation";
 
 // Organize student navigation items by category
 const studentNavGroups: Record<string, NavItem[]> = {
@@ -309,3 +310,4 @@ export function NavStudent() {
     </>
   );
 }
+*/

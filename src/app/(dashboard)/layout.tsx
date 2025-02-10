@@ -14,6 +14,7 @@ import {
 import { UserNav } from "@/components/navbar/user-navbar";
 import { SearchCommand } from "@/components/commands/search-command";
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs";
+import { useAuth } from "@/contexts/auth-context";
 
 // Dashboard Layout Component
 // Provides the common layout structure for all dashboard pages including:
@@ -29,20 +30,14 @@ export default function Layout({
   // Get current page breadcrumbs
   const breadcrumbs = useBreadcrumbs();
 
-  // TODO: Replace with actual user data from authentication
-  const user = {
-    name: "Kwaku Ampem Affram",
-    email: "radahn@example.com",
-    role: "Student",
-    avatar: "/logo.jpg",
-  };
+  const { user } = useAuth();
 
   return (
     // Wrap entire layout in SidebarProvider for sidebar state management
     <SidebarProvider>
       {/* Sidebar - Hidden on mobile, visible on md breakpoint and up */}
       <div className="hidden md:block border-r min-h-screen bg-sidebar-primary text-sidebar-foreground">
-        <AppSidebar user={user} />
+        <AppSidebar user={user || undefined} />
       </div>
 
       {/* Main Content Area */}

@@ -17,7 +17,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CalendarDateRangePicker } from "@/components/date-range-picker";
 import { Overview } from "@/components/overview";
 import { RecentUsers } from "@/components/recent-users";
-import { UserNav } from "@/components/navbar/user-navbar";
 
 /**
  * Administrator Dashboard Page Component

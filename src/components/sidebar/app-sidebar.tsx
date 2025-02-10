@@ -1,87 +1,61 @@
 "use client";
-import * as React from "react";
-import { Command, LifeBuoy, Settings2, Home, School2 } from "lucide-react";
-import { NavMain } from "@/components/sidebar/nav-main";
-import { NavAdmin } from "@/components/sidebar/nav-admin";
-import { NavStudent } from "@/components/sidebar/nav-student";
-import { NavLecturer } from "@/components/sidebar/nav-lecturer";
-import { NavHOD } from "@/components/sidebar/nav-hod";
-import { NavDean } from "@/components/sidebar/nav-dean";
-import { NavGrademaster } from "@/components/sidebar/nav-grademaster";
-import { NavSecondary } from "@/components/sidebar/nav-secondary";
-import { NavUser } from "@/components/sidebar/nav-user";
-import {
-  NavSkeleton,
-  SidebarHeaderSkeleton,
-  SidebarUserSkeleton,
-} from "@/components/ui/sidebar-skeleton";
+
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { School2 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuButton,
   useSidebar,
 } from "@/components/ui/sidebar";
-import type { User } from "@/types/navigation";
-import { cn } from "@/lib/utils";
-import { Skeleton } from "../ui/skeleton";
+import { User } from "@/types/auth";
+import { NavUser } from "./nav-user";
+import { NavMain } from "./nav-main";
+import { getNavigation, NavItem } from "@/config/navigation";
 
+/**
+ * Props interface for the AppSidebar component
+ * Extends Sidebar component props and adds optional user prop
+ */
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user: User;
+  user?: User;
 }
 
-const getDashboardUrl = (role: string) => {
-  switch (role.toLowerCase()) {
-    case "administrator":
-      return "/admin/dashboard";
-    case "student":
-      return "/student/dashboard";
-    case "lecturer":
-      return "/lecturer/dashboard";
-    case "hod":
-      return "/hod/dashboard";
-    case "dean":
-      return "/dean/dashboard";
-    case "grademaster":
-      return "/grademaster/dashboard";
-    default:
-      return "/";
-  }
-};
-
+/**
+ * AppSidebar Component
+ * Main navigation sidebar for the application that adapts based on user role
+ *
+ * Features:
+ * - Collapsible sidebar with icon-only mode
+ * - Role-based navigation items
+ * - Grouped navigation structure
+ * - User profile section
+ *
+ * @param {AppSidebarProps} props - Component properties including user data
+ * @returns {JSX.Element} Rendered sidebar component
+ */
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
+  // Get current sidebar state (expanded/collapsed)
   const { state } = useSidebar();
-  const [isLoading, setIsLoading] = React.useState(true);
 
-  const safeUser = {
-    name: user?.name || "User",
-    email: user?.email || "",
-    role: user?.role || "Guest",
-    avatar: user?.avatar || "",
-  };
+  // Get navigation items based on user role
+  const navItems = user ? getNavigation(user.role) : [];
 
-  // Update commonNavItems to use dynamic dashboard URL
-  const commonNavItems = [
-    {
-      title: "Dashboard",
-      url: getDashboardUrl(safeUser.role),
-      icon: Home,
-    },
-    {
-      title: "Settings",
-      url: "/settings",
-      icon: Settings2,
-    },
-  ];
-
-  // Simulate loading state
-  React.useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+  // Organize navigation items into groups
+  // Groups: main, academic, administrative, etc.
+  const groups = navItems.reduce((acc, item) => {
+    const groupName = item.group || "main";
+    if (!acc[groupName]) {
+      acc[groupName] = [];
+    }
+    acc[groupName].push(item);
+    return acc;
+  }, {} as Record<string, NavItem[]>);
 
   return (
     <Sidebar
@@ -90,77 +64,62 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       className={cn(
         "transition-all duration-300 ease-in-out",
         state === "collapsed" && "w-[var(--sidebar-width-icon)]",
-        // Add smooth transitions for child elements
         "[&_*]:transition-all [&_*]:duration-200 [&_*]:ease-in-out"
       )}
       {...props}
     >
+      {/* Header Section - App Logo and Title */}
       <SidebarHeader>
-        {isLoading ? (
-          <SidebarHeaderSkeleton />
-        ) : (
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton
-                size="lg"
-                asChild
-                className={cn(
-                  "px-4",
-                  state === "collapsed" && "justify-center",
-                  "transition-transform hover:scale-[0.98]"
-                )}
-              >
-                <a href="/">
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                    <School2 className="size-6" />
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              size="lg"
+              asChild
+              className={cn(
+                "px-4",
+                state === "collapsed" && "justify-center",
+                "transition-transform hover:scale-[0.98]"
+              )}
+            >
+              <a href="/">
+                {/* App Logo/Icon Container */}
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <School2 className="size-6" />
+                </div>
+                {/* App Title - Only shown when sidebar is expanded */}
+                {state === "expanded" && (
+                  <div className="grid flex-1 text-left text-sm leading-tight">
+                    <span className="truncate font-semibold">
+                      iSchool - SIMS
+                    </span>
+                    <span className="truncate text-xs">
+                      Valley View University
+                    </span>
                   </div>
-                  {state === "expanded" && (
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-semibold">
-                        iSchool - SIMS
-                      </span>
-                      <span className="truncate text-xs">
-                        Valley View University
-                      </span>
-                    </div>
-                  )}
-                </a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        )}
+                )}
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
       </SidebarHeader>
+
+      {/* Main Navigation Content */}
       <SidebarContent>
-        {isLoading ? (
-          <>
-            <NavSkeleton count={2} />
-            <div className="my-2 px-4">
-              <Skeleton className="h-px w-full" />
-            </div>
-            <NavSkeleton count={3} />
-            <div className="my-2 px-4">
-              <Skeleton className="h-px w-full" />
-            </div>
-            <NavSkeleton count={2} />
-          </>
-        ) : (
-          <>
-            <NavMain items={commonNavItems} />
-            {safeUser.role === "Administrator" && <NavAdmin />}
-            {safeUser.role === "Student" && <NavStudent />}
-            {safeUser.role === "Lecturer" && <NavLecturer />}
-            {safeUser.role === "HOD" && <NavHOD />}
-            {safeUser.role === "Dean" && <NavDean />}
-            {safeUser.role === "Grademaster" && <NavGrademaster />}
-            <NavSecondary
-              items={[{ title: "Support", url: "#", icon: LifeBuoy }]}
-              className="mt-auto"
-            />
-          </>
-        )}
+        <NavMain groups={groups} />
       </SidebarContent>
+
+      {/* Footer - User Profile Section */}
       <SidebarFooter>
-        {isLoading ? <SidebarUserSkeleton /> : <NavUser user={safeUser} />}
+        {user && (
+          <NavUser
+            user={{
+              name: user.name,
+              email: user.email,
+              role: user.role,
+              avatar: user.avatar || "/default-avatar.png",
+            }}
+          />
+        )}
       </SidebarFooter>
     </Sidebar>
   );
