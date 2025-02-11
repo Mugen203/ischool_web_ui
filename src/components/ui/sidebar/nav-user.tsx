@@ -27,88 +27,58 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 interface NavUserProps {
   user: {
     name: string;
     email: string;
-    avatar?: string; // Make avatar optional
     role: string;
+    avatar: string;
   };
+  className?: string;
 }
 
-export function NavUser({ user }: NavUserProps) {
+/**
+ * NavUser Component
+ *
+ * Renders a sidebar menu item with user information and actions.
+ * Displays user's avatar, name, and email address.
+ * Provides a dropdown menu with navigation options, such as profile and logout.
+ *
+ * @param {NavUserProps} props - The properties for the NavUser component.
+ * @param {Object} props.user - The user data containing name, email, role, and avatar.
+ * @param {string} [props.className] - Optional additional class names for styling.
+ *
+ * @returns {JSX.Element} The rendered NavUser component.
+ */
+
+export function NavUser({ user, className }: NavUserProps) {
   const { isMobile } = useSidebar();
 
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                {user.avatar ? (
+    <div className={cn("mt-auto pt-2 border-t nav-user-hover", className)}>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <SidebarMenuButton size="lg" className="nav-user-item w-full">
+                <Avatar className="size-8">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                ) : (
-                  <AvatarFallback className="rounded-lg">
-                    {user.name.charAt(0)}
+                  <AvatarFallback>
+                    {user.name.charAt(0).toUpperCase()}
                   </AvatarFallback>
-                )}
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  {user.avatar ? (
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                  ) : (
-                    <AvatarFallback className="rounded-lg">
-                      {user.name.charAt(0)}
-                    </AvatarFallback>
-                  )}
                 </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                <div className="grid flex-1 text-left text-sm">
+                  <span className="font-medium nav-user-item">{user.name}</span>
+                  <span className="text-xs nav-user-item">{user.email}</span>
                 </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem asChild>
-                <a href="/profile">
-                  <User className="mr-2" />
-                  Profile
-                </a>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem asChild>
-              <a href="/logout">
-                {" "}
-                <LogOut className="mr-2" />
-                Log out
-              </a>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarMenuItem>
-    </SidebarMenu>
+                <ChevronsUpDown className="ml-auto size-4 nav-user-item" />
+              </SidebarMenuButton>
+            </DropdownMenuTrigger>
+          </DropdownMenu>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </div>
   );
 }

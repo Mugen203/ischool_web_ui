@@ -22,7 +22,7 @@ interface BaseSettingsProps {
 
 export function BaseSettings({ title = "Settings", tabs }: BaseSettingsProps) {
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-2">
       <h1 className="text-3xl font-bold mb-6">{title}</h1>
 
       <Tabs defaultValue={tabs[0]?.value} className="space-y-4">

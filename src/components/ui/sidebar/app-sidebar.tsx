@@ -41,14 +41,9 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
  * @returns {JSX.Element} Rendered sidebar component
  */
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
-  // Get current sidebar state (expanded/collapsed)
   const { state } = useSidebar();
-
-  // Get navigation items based on user role
   const navItems = user ? getNavigation(user.role) : [];
 
-  // Organize navigation items into groups
-  // Groups: main, academic, administrative, etc.
   const groups = navItems.reduce((acc, item) => {
     const groupName = item.group || "main";
     if (!acc[groupName]) {
@@ -64,12 +59,11 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       variant="inset"
       className={cn(
         "transition-all duration-300 ease-in-out",
-        state === "collapsed" && "w-[var(--sidebar-width-icon)]",
-        "[&_*]:transition-all [&_*]:duration-200 [&_*]:ease-in-out"
+        "bg-sidebar text-secondary-foreground",
+        state === "collapsed" && "w-[var(--sidebar-width-icon)]"
       )}
       {...props}
     >
-      {/* Header Section - App Logo and Title */}
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -77,23 +71,21 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               size="lg"
               asChild
               className={cn(
-                "px-4",
+                "px-4 rounded-lg",
                 state === "collapsed" && "justify-center",
-                "transition-transform hover:scale-[0.98]"
+                "transition-all duration-200 hover:shadow-md hover:bg-accent/5"
               )}
             >
               <Link href="/">
-                {/* App Logo/Icon Container */}
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <School2 className="size-6" />
                 </div>
-                {/* App Title - Only shown when sidebar is expanded */}
                 {state === "expanded" && (
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">
+                    <span className="truncate font-semibold text-[hsl(var(--text-default))]">
                       iSchool - SIMS
                     </span>
-                    <span className="truncate text-xs">
+                    <span className="truncate text-xs text-muted-foreground hover:text-[hsl(var(--text-hover))]">
                       Valley View University
                     </span>
                   </div>
@@ -104,12 +96,24 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
         </SidebarMenu>
       </SidebarHeader>
 
-      {/* Main Navigation Content */}
       <SidebarContent>
-        <NavMain groups={groups} />
+        <NavMain
+          groups={groups}
+          className={cn(
+            // Updated text color and hover states
+            "[&_a]:text-[hsl(var(--text-default))]",
+            "[&_a:hover]:text-[hsl(var(--text-hover))]",
+            "[&_a:hover]:shadow-md",
+            "[&_a]:rounded-md",
+            "[&_a]:transition-all",
+            "[&_a]:duration-200",
+            // Added specific styles for text inside links
+            "[&_a_span]:text-[hsl(var(--text-default))]",
+            "[&_a:hover_span]:text-[hsl(var(--text-hover))]"
+          )}
+        />
       </SidebarContent>
 
-      {/* Footer - User Profile Section */}
       <SidebarFooter>
         {user && (
           <NavUser
@@ -117,8 +121,18 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               name: user.name,
               email: user.email,
               role: user.role,
-              avatar: user.avatar || "/default-avatar.png",
+              avatar: user.avatar || "/logo.jpg",
             }}
+            className={cn(
+              "text-[hsl(var(--text-default))]",
+              "[&_span]:text-muted-foreground",
+              "[&_span:hover]:text-[hsl(var(--text-hover))]",
+              "hover:shadow-md",
+              "hover:bg-accent/5",
+              "rounded-md",
+              "transition-all",
+              "duration-200"
+            )}
           />
         )}
       </SidebarFooter>

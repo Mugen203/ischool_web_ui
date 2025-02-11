@@ -8,6 +8,8 @@ import "./globals.css";
 import { AuthProvider } from "@/contexts/auth-context";
 // Import role switcher component
 import { RoleSwitcher } from "@/components/role-switcher";
+// Import theme provider
+import { ThemeProvider } from "@/providers/theme-provider";
 
 /**
  * Configure Inter font with Latin subset
@@ -53,10 +55,16 @@ export default function RootLayout({
       <AuthProvider>
         {/* Body container with Inter font applied */}
         <body className={inter.className}>
-          {/* Render page-specific content */}
-          {children}
-          {/* Role switcher component */}
-          <RoleSwitcher />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem={true}
+          >
+            {/* Render page-specific content */}
+            {children}
+            {/* Role switcher component */}
+            <RoleSwitcher />
+          </ThemeProvider>
         </body>
       </AuthProvider>
     </html>

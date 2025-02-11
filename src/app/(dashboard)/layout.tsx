@@ -35,21 +35,21 @@ export default function Layout({
   return (
     // Wrap entire layout in SidebarProvider for sidebar state management
     <SidebarProvider>
-      {/* Sidebar - Hidden on mobile, visible on md breakpoint and up */}
-      <div className="hidden md:block border-r min-h-screen bg-sidebar-primary text-sidebar-foreground">
+      {/* Updated Sidebar with text-hover class */}
+      <div className="hidden md:block border-r min-h-screen bg-secondary text-secondary-foreground">
         <AppSidebar user={user || undefined} />
       </div>
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col bg-background text-foreground">
-        {/* Sticky Header - Always visible at top of viewport */}
-        <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-background">
+        {/* Updated Header with background color */}
+        <header className="sticky top-0 z-10 flex h-16 shrink-0 items-center gap-2 border-b bg-secondary text-secondary-foreground">
           <div className="flex items-center gap-2 px-4 container mx-auto">
             {/* Mobile Sidebar Trigger */}
             <SidebarTrigger />
             <Separator orientation="vertical" className="mr-2 h-4" />
 
-            {/* Breadcrumb Navigation - Shows current page hierarchy */}
+            {/* Updated Breadcrumbs with hover effect */}
             <Breadcrumb>
               <BreadcrumbList>
                 {breadcrumbs.map((segment, index) => (
@@ -57,26 +57,30 @@ export default function Layout({
                     {/* Hide breadcrumbs on mobile for space efficiency */}
                     <BreadcrumbItem className="hidden md:block">
                       {segment.active ? (
-                        <BreadcrumbPage>{segment.title}</BreadcrumbPage>
+                        <BreadcrumbPage className="text-muted-foreground">
+                          {segment.title}
+                        </BreadcrumbPage>
                       ) : (
-                        <BreadcrumbLink href={segment.href}>
+                        <BreadcrumbLink
+                          href={segment.href}
+                          className="text-hover"
+                        >
                           {segment.title}
                         </BreadcrumbLink>
                       )}
                     </BreadcrumbItem>
                     {/* Add separator between breadcrumb items */}
                     {index < breadcrumbs.length - 1 && (
-                      <BreadcrumbSeparator className="hidden md:block" />
+                      <BreadcrumbSeparator className="hidden md:block text-muted-foreground" />
                     )}
                   </React.Fragment>
                 ))}
               </BreadcrumbList>
             </Breadcrumb>
 
-            {/* Right-side Header Elements */}
+            {/* Updated Header Elements with hover effects */}
             <div className="ml-auto flex items-center space-x-4">
               <SearchCommand /> {/* Global search functionality */}
-              <UserNav /> {/* User profile and related actions */}
             </div>
           </div>
         </header>

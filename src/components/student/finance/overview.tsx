@@ -8,6 +8,7 @@ import {
   YAxis,
   Tooltip,
 } from "recharts";
+import { cn } from "@/lib/utils";
 
 const data = [
   { name: "Jan", amount: 1500 },
@@ -24,23 +25,40 @@ export default function Overview() {
       <BarChart data={data}>
         <XAxis
           dataKey="name"
-          stroke="#888888"
-          fontSize={12}
+          className="text-muted-foreground text-xs"
           tickLine={false}
           axisLine={false}
         />
         <YAxis
-          stroke="#888888"
-          fontSize={12}
+          className="text-muted-foreground text-xs"
           tickLine={false}
           axisLine={false}
           tickFormatter={(value) => `$${value}`}
         />
         <Tooltip
-          formatter={(value) => [`$${value}`, "Amount"]}
-          labelFormatter={(label) => `Month: ${label}`}
+          content={({ active, payload, label }) => {
+            if (active && payload && payload.length) {
+              return (
+                <div className="rounded-lg border bg-background p-2 shadow-sm">
+                  <div className="text-muted-foreground text-xs">
+                    Month: {label}
+                  </div>
+                  <div className="font-bold">${payload[0].value}</div>
+                </div>
+              );
+            }
+            return null;
+          }}
         />
-        <Bar dataKey="amount" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+        <Bar
+          dataKey="amount"
+          className={cn(
+            "fill-[hsl(var(--chart-1))]",
+            "hover:fill-[hsl(var(--chart-2))]",
+            "transition-colors duration-200"
+          )}
+          radius={[4, 4, 0, 0]}
+        />
       </BarChart>
     </ResponsiveContainer>
   );
