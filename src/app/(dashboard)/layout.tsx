@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { AppSidebar } from "@/components/sidebar/app-sidebar";
+import { AppSidebar } from "@/components/ui/sidebar/app-sidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -11,7 +11,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { UserNav } from "@/components/navbar/user-navbar";
+import { UserNav } from "@/components/ui/navbar/user-navbar";
 import { SearchCommand } from "@/components/commands/search-command";
 import { useBreadcrumbs } from "@/hooks/use-breadcrumbs";
 import { useAuth } from "@/contexts/auth-context";
