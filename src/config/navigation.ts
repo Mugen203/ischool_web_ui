@@ -172,7 +172,7 @@ export const getNavigation = (role: UserRole): NavItem[] => {
           group: "administrative",
         },
         {
-          title: "Financial Summary",
+          title: "Financials",
           url: `/${role}/financials`,  // Updated
           icon: Wallet,
           group: "administrative",

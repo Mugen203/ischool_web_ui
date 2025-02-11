@@ -31,7 +31,7 @@ export default function CourseRegistrationPage() {
   const [registrationOpen, setRegistrationOpen] = useState(true);
 
   return (
-    <div className="container mx-auto py-10 shadow-lg">
+    <div className="container mx-auto py-2 shadow-lg">
       {/* Page Header */}
       <h1 className="text-3xl font-bold mb-6">Course Registration</h1>
 
