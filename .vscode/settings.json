@@ -1,9 +1,229 @@
 {
+    // --- Editor Basics & Behavior ---
+
+    "editor.fontSize": 13.5,          // Font size
+    "editor.lineHeight": 32,        // Increased line height for readability
+    "editor.fontWeight": "400",     // Normal font weight
+    "editor.fontFamily": "JetBrains Mono, Fira Code, Rec Mono Casual, Consolas, 'Courier New', monospace", // Font stack, including previous choices
+    "editor.wordWrap": "wordWrapColumn",  // Wrap at the column specified below
+    "editor.wordWrapColumn": 120,       // Wrap at 120 characters
+    "editor.tabSize": 4,            // Use 4 spaces for tabs (consistent across Prettier and Vetur)
+    "editor.detectIndentation": false, // Don't auto-detect indentation (use tabSize instead)
+    "editor.insertSpaces": true,      // Use spaces instead of tabs (implied by tabSize, but good to be explicit)
+    "editor.renderControlCharacters": false, // Hide control characters
+    "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?", // Removed hyphen from word separators
+    "editor.multiCursorModifier": "ctrlCmd", // Ctrl/Cmd for multi-cursor
+    "editor.snippetSuggestions": "top",  // Show snippets at the top of suggestions
+    "editor.linkedEditing": true,        // Renaming HTML tags
+    "editor.padding.top": 16,            // Padding at the top
+    "editor.cursorBlinking": "solid",     // Solid, non-blinking cursor
+    "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'calt', 'dlig'",  // Enables specific font ligatures
+    "editor.accessibilitySupport": "off", // Turns off accessibility.
+    "editor.stickyScroll.enabled": false,  //Disable sticky scroll.
+    "editor.inlineSuggest.suppressSuggestions": true, //Suppres inline suggestion
+
+    // --- Whitespace Handling ---
+
+    "files.trimTrailingWhitespace": true,   // Trim trailing whitespace on save
+    "files.insertFinalNewline": true,       // Add a newline at the end of files
+    "files.trimFinalNewlines": true,        // Trim extra newlines at the end
+    "files.autoSave": "afterDelay",         // Auto-save after a delay
+
+    // --- Copy/Paste & Clipboard ---
+
+    "editor.copyWithSyntaxHighlighting": false, // Copy without syntax highlighting
+    "editor.emptySelectionClipboard": false,  // Don't copy line on empty selection
+
+    // --- Diff Editor ---
+
+    "diffEditor.ignoreTrimWhitespace": false, // Show whitespace changes in diffs
+    "diffEditor.renderSideBySide": false,   // Inline diff view
+    "diffEditor.wordWrap": "on",           // Word wrap in diff editor
+
+    // ---  UI & Workbench ---
+    "workbench.startupEditor": "none",    // No editor on startup
+    "workbench.editor.enablePreview": false, // Disable preview tabs
+    "workbench.editor.enablePreviewFromQuickOpen": false, // Disable preview from Quick Open
+    "window.newWindowDimensions": "inherit",// Inherit window dimensions
+    "workbench.editor.showTabs": "multiple",    //Hides tabs
+    "workbench.activityBar.location": "hidden", // Hide activity bar
+    "workbench.statusBar.visible": false,      // Hide status bar
+    "workbench.tree.indent": 15,           // Tree indentation
+    "workbench.tree.enableStickyScroll": false, //Tree sticky scroll.
+    "workbench.tips.enabled": false,        // Disables tips
+    "explorer.confirmDelete": false,        // Disable delete confirmation
+     "explorer.sortOrder": "type",          //Sorts by type
+    "window.nativeFullScreen": true,          //Native fullscreen
+    "security.workspace.trust.untrustedFiles": "open", //Opens all untrusted files.
+
+    // ---  Hiding UI Elements (Minimizing Distractions) ---
+    "editor.minimap.enabled": false,        // Hide minimap
+    "editor.lineNumbers": "on",            // Hide line numbers
+    "editor.guides.indentation": false,    // Hide indentation guides
+    "breadcrumbs.enabled": false,           // Hide breadcrumbs
+    "scm.diffDecorations": "none",          // Hide source control diff decorations
+    "editor.matchBrackets": "never",       // Disable bracket matching
+    "editor.colorDecorators": false,        // Hide color decorators
+    "git.decorations.enabled": false,      // Hide Git decorations
+    "editor.lightbulb.enabled": "off",    // Disable lightbulb
+    "editor.selectionHighlight": false,    // Disable selection highlight
+    "editor.overviewRulerBorder": false,   // Hide overview ruler border
+    "editor.renderLineHighlight": "none",  // Only highlight cursor
+    "editor.occurrencesHighlight": "off", // Disable symbol occurrences highlight
+    "problems.decorations.enabled": false, // Hide problems decorations
+    "editor.hideCursorInOverviewRuler": true, // Hide cursor in overview ruler
+      "editor.minimap.maxColumn": 250,         //minimap max column
+    "workbench.sideBar.location": "left",    // Sidebar on the right
+
+    // --- "Go To" Behavior (Direct Navigation) ---
+    "editor.gotoLocation.multipleReferences": "goto",
+    "editor.gotoLocation.multipleDefinitions": "goto",
+    "editor.gotoLocation.multipleDeclarations": "goto",
+    "editor.gotoLocation.multipleImplementations": "goto",
+    "editor.gotoLocation.multipleTypeDefinitions": "goto",
+
+    // --- Hover ---
+
+    "editor.hover.delay": 1500,           // Hover delay (1.5s)
+    "editor.hover.enabled": true,          // Enable hover
+
+    // --- Inlay Hints (JavaScript/TypeScript) ---
+
+    "javascript.inlayHints.parameterNames.enabled": "all",     // Show parameter names
+    "javascript.inlayHints.parameterTypes.enabled": true,      // Show parameter types
+    "javascript.inlayHints.propertyDeclarationTypes.enabled": true, // Show property types
+
+     // --- Quick suggestions ---
+     "editor.quickSuggestions": {
+        "strings": true
+    },
+
+    // --- Search ---
+
+    "search.useIgnoreFiles": false, // *Don't* use .gitignore for search exclusions
+    "search.exclude": {             // Explicitly exclude these:
+        "**/vendor/{[^l],?[^ai]}*": true,  // Complex glob to exclude vendor except "laravel" and "livewire"
+        "**/public/{[^i],?[^n]}*": true,  // Complex glob to exclude public except "index.php"
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/_ide_helper.php": true,
+        "**/composer.lock": true,
+        "**/package-lock.json": true,
+        "storage": true,
+        ".phpunit.result.cache": true
+    },
+
+    // --- Emmet ---
+
+    "emmet.includeLanguages": {
+        "blade": "html",
+        "vue-html": "html",
+        "vue": "html",
+        "react": "html",
+        "javascript": "html"
+    },
+
+    // --- File Associations ---
+    "files.associations": {
+        ".php_cs": "php",
+        ".php_cs.dist": "php"
+    },
+
+    // --- Language-Specific Settings (Formatting) ---
+
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
     "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[tailwindcss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[jsonc]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "javascript.inlayHints.parameterNames.enabled": "all",
-    "javascript.inlayHints.parameterTypes.enabled": true,
-    "javascript.inlayHints.propertyDeclarationTypes.enabled": true,
-    "editor.fontFamily": "Rec Mono Casual, JetBrains Mono, Consolas, 'Courier New', monospace"
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features" // Use VS Code's built-in JSON formatter
+    },
+    "[html]": {
+        //"editor.defaultFormatter": "apility.beautify-blade",  //  Blade formatter!  Make sure you have this extension.
+        "editor.formatOnSave": true
+    },
+      "[php]": {
+        //"editor.defaultFormatter": "bmewburn.vscode-intelephense-client" //Intelephense
+    },
+    "php.suggest.basic": false,       // Disable basic PHP suggestions (assuming Intelephense)
+    "prettier.requireConfig": true,   // Require a Prettier config file
+    "prettier.useEditorConfig": false, // Don't use .editorconfig for Prettier
+    "prettier.tabWidth": 4,           // Prettier tab width (4 spaces)
+    "vetur.format.options.tabSize": 4, // Vetur (Vue) tab size (4 spaces)
+    "tailwindCSS.includeLanguages": { //Tailwind
+        "plaintext": "html"
+    },
+     "tailwindCSS.experimental.configFile": null, //Tailwind experimental
+
+    // --- Codesnap Settings ---
+
+    "codesnap.containerPadding": "8em",
+    "codesnap.boxShadow": "rgba(0, 0, 0, 0.55) 0px 12px 24px",
+    "codesnap.backgroundColor": "#FFC540",
+    "codesnap.showLineNumbers": false,
+    "codesnap.roundedCorners": true,
+
+     // --- Integrated Terminal ---
+    "terminal.integrated.lineHeight": 1.5,
+    "terminal.integrated.fontSize": 13.5,
+      "chat.editor.wordWrap": "on",  //Word wrap.
+
+    // --- Theme and Icons ---
+
+    "workbench.colorTheme": "React Theme",      // Your chosen color theme
+    "workbench.iconTheme": "eq-material-theme-icons-light",   // Your chosen icon theme
+    "material-icon-theme.files.color": "#42a5f5",
+    "material-icon-theme.saturation": 0, //Material Icon.
+
+    // --- Custom CSS/JS (Advanced - Requires Extension) ---
+
+    "vscode_custom_css.imports": [  //  Requires "Custom CSS and JS Loader" extension
+        "file:///C:/Users/Radahn/Documents/Custom VSCode Settings/custom-vscode.css",  //  Replace with your actual paths!
+        "file:///C:/Users/Radahn/Documents/Custom VSCode Settings/custom-vscode.css"  //  Replace with your actual paths!
+    ],
+
+    "editor.tokenColorCustomizations": {  //Removes style from comments.
+        "textMateRules": [
+            {
+                "scope": [
+                "comment",
+                "keyword",
+                "variable.language",
+                "entity.other.attribute-name.html",
+                "entity.other.attribute-name",
+                "keyword.control",
+                "storage.type",
+                "comment",
+                "comment.block",
+                "comment.line"
+                ],
+                "settings": {
+                    "fontStyle": ""
+                }
+            }
+        ]
+    }
 }
