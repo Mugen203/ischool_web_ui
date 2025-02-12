@@ -59,8 +59,8 @@ export function AdminDashboard({ user }: { user: User }) {
 
   // Metrics section
   const metrics = (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <Card>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-evenly">
+      <Card className="p-2">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Total Users</CardTitle>
           <Users className="h-4 w-4 text-muted-foreground" />
@@ -73,7 +73,7 @@ export function AdminDashboard({ user }: { user: User }) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="p-2">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">New Students</CardTitle>
           <UserPlus className="h-4 w-4 text-muted-foreground" />
@@ -86,7 +86,7 @@ export function AdminDashboard({ user }: { user: User }) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="p-2">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Fees Collected</CardTitle>
           <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -97,7 +97,7 @@ export function AdminDashboard({ user }: { user: User }) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="p-2">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">Active Courses</CardTitle>
           <BookOpen className="h-4 w-4 text-muted-foreground" />
