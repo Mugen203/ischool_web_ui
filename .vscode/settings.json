@@ -64,7 +64,7 @@
     "scm.diffDecorations": "none",          // Hide source control diff decorations
     "editor.matchBrackets": "never",       // Disable bracket matching
     "editor.colorDecorators": false,        // Hide color decorators
-    "git.decorations.enabled": false,      // Hide Git decorations
+    "git.decorations.enabled": true,      // Show Git decorations
     "editor.lightbulb.enabled": "off",    // Disable lightbulb
     "editor.selectionHighlight": false,    // Disable selection highlight
     "editor.overviewRulerBorder": false,   // Hide overview ruler border

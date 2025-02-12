@@ -7,40 +7,40 @@
     /* Light theme - updated for better contrast and readability */
     --background: 0 0% 98%; /* Changed to slightly off-white */
     --foreground: 240 10% 3.9%;
-    
+
     --card: 0 0% 100%;
     --card-foreground: 240 10% 3.9%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 240 10% 3.9%;
-    
+
     /* Updated primary color */
     --primary: 212 100% 66%;
     --primary-foreground: 0 0% 100%;
-    
+
     /* Updated secondary color to light blue */
     --secondary: 213 100% 98%; /* Light blue background */
     --secondary-foreground: 240 10% 3.9%; /* Dark text for contrast */
-    
+
     /* Updated muted colors for text */
     --muted: 220 13% 91%;
     /* Light grey for normal text */
     --muted-foreground: 220 9% 46%;
     /* Hover color for text */
     --hover: 244 54% 27%;
-    
+
     /* Updated accent to match the theme */
     --accent: 244 39% 34%;
     --accent-foreground: 0 0% 100%;
-    
+
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    
+
     --border: 220 13% 91%;
     --input: 220 13% 91%;
     --ring: 240 100% 23%;
     --radius: 0.75rem;
-    
+
     /* Chart colors - maintained for consistency */
     --chart-1: 221.2 83.2% 53.3%;
     --chart-2: 199 89% 48%;
@@ -105,23 +105,23 @@
   }
 
   .text-hover {
-    @apply text-muted-foreground 
-           hover:text-[hsl(var(--primary))] 
+    @apply text-muted-foreground
+           hover:text-[hsl(var(--primary))]
            transition-colors-smooth;
   }
 
   /* Base menu item styles */
   .menu-item-base {
     @apply text-[hsl(var(--text-default))]
-           transition-all 
-           duration-200 
+           transition-all
+           duration-200
            rounded-md;
   }
 
   /* Common hover effects for all menu items */
   .menu-hover-effects {
-    @apply hover:bg-accent/5 
-           hover:shadow-md 
+    @apply hover:bg-accent/5
+           hover:shadow-md
            hover:text-[hsl(var(--primary))]
            [&_span]:text-[hsl(var(--text-default))]
            [&_span]:hover:text-[hsl(var(--primary))];

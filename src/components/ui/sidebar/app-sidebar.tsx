@@ -58,8 +58,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       collapsible="icon"
       variant="inset"
       className={cn(
-        "transition-all duration-300 ease-in-out",
-        "bg-sidebar text-secondary-foreground",
+        "transition-all duration-300 ease-in-out sidebar", // Added 'sidebar' class
         state === "collapsed" && "w-[var(--sidebar-width-icon)]"
       )}
       {...props}
@@ -73,7 +72,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               className={cn(
                 "px-4 rounded-lg",
                 state === "collapsed" && "justify-center",
-                "transition-all duration-200 hover:shadow-md hover:bg-accent/5"
+                "transition-all duration-200 hover:shadow-md hover:bg-accent/5" // hover styles
               )}
             >
               <Link href="/">
